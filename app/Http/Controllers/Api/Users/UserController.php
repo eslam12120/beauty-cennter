@@ -16,11 +16,11 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
-    // 
+    //
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users,email', 
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|max:50|min:5',
         ], [
             'email.required' => trans('auth.email.register'),
@@ -28,7 +28,7 @@ class UserController extends Controller
             'password.required' => trans('auth.password.register'),
             'password.min' => trans('auth.password.min.register'),
             'password.max' => trans('auth.password.max.register'),
-           
+
         ]);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()],422);
@@ -38,10 +38,10 @@ class UserController extends Controller
         try {
 
         $user = User::create([
-            
+
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        
+            'device_token' => $request->device_token,
 
 
         ]);
@@ -78,7 +78,7 @@ class UserController extends Controller
 
             return response()->json(['error' => 'Failed to create user: ' . $e->getMessage()], 500);
         }
-        
+
 
 
     }
@@ -107,7 +107,9 @@ class UserController extends Controller
             }
 
         $user = User::where('email', $request->email)->first();
-        
+            $user->device_token = $request->device_token;
+            $user->save();
+
         $code = mt_rand(100000, 999999);
         $user_verification = UserVerification::create([
 
@@ -133,7 +135,7 @@ class UserController extends Controller
         return response()->json([
             'code' => $code,
             'status' => '200',
-        
+
             'email'=>$request->email,
         ]);
         } catch (Exception $e) {
@@ -151,13 +153,13 @@ class UserController extends Controller
             [
                 'code' => 'required',
                 'email'=>'required',
-                
+
             ],
             [
                 'email.required' => trans('auth.email.register'),
                 'code.required' => trans('auth.code.required'),
                 'code.exists' => trans('auth.code.exists'),
-             
+
             ]
         );
         if ($validator->fails()) {
@@ -171,7 +173,7 @@ class UserController extends Controller
             $token = auth()->guard('user-api')->login($user);
 
             $user_otp->delete();
-           
+
             return $this->respondWithToken($token);
 
         } else {

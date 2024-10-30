@@ -16,7 +16,7 @@ class EditProfileController extends Controller
 {
     public function Editprofile(Request $request)
     {
-       
+
             $validator = Validator::make($request->all(),[
 
                 'name'=>'required|string',
@@ -27,14 +27,14 @@ class EditProfileController extends Controller
             'name.required'=>trans('editProfile.nameRequired'),
             'name.string'=>trans('editProfile.nameString'),
             'image.required'=>trans('editProfile.photoRequired'),
-           
+
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'message'=>$validator->errors()->first(),'status'=> 422
             ]);
         }
-     
+
         try {
             $user=User::where('id',Auth::guard('user-api')->user()->id)->first();
             DB::beginTransaction();
@@ -51,6 +51,7 @@ class EditProfileController extends Controller
                         $users= User::where('id',auth('user-api')->user()->id)->update([
                         'date_of_birth' => $request->date_of_birth,
                         'name'=>$request->name,
+                        'is_completed'=>'1',
                         'image'=>$name,
                         ]);
                         DB::commit();
@@ -65,7 +66,7 @@ class EditProfileController extends Controller
 
             return response()->json(['error' => 'Failed to create user: ' . $e->getMessage()], 500);
         }
-        
+
     }
     public function change_password(Request $request)
     {
@@ -85,7 +86,7 @@ class EditProfileController extends Controller
             ]);
         }
         $user=Auth::guard('user-api')->user();
-        
+
         if(Hash::check($request->old_password,$user->password)){
             User::findOrfail(Auth::guard('user-api')->user()->id)->update([
                 'password'=>Hash::make($request->password)

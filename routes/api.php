@@ -53,4 +53,4 @@ Route::get('getAllCategories',[\App\Http\Controllers\Api\CategoryController::cla
 Route::get('getAllSpecialists',[\App\Http\Controllers\Api\SpecialistController::class,'getAllSpecialists']);
 Route::get('categorySpecialistSearch/{search}',[\App\Http\Controllers\Api\SearchController::class,'categorySpecialistSearch']);
 Route::get('specialistSearch/{search}',[\App\Http\Controllers\Api\SearchController::class,'specialistSearch']);
-// Route::get('getUpcomingBookings',[])
+Route::get('getUpcomingBookings',[\App\Http\Controllers\Api\BookingsController::class,'getUpcomingBookings'])

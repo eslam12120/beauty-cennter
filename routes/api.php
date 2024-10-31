@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\SpecialForYou;
 use App\Http\Controllers\Api\Users\EditProfileController;
 use App\Http\Controllers\Api\Users\ForgotPasswordController;
 use App\Http\Controllers\Api\Users\ResetPasswordController;
 use App\Http\Controllers\Api\Users\SocialLoginController;
 use App\Http\Controllers\Api\Users\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
-    
+
     Route::group(['namespace' => 'Users'], function () {
-       
+
         Route::post('user/register', [UserController::class, 'register']);
         Route::post('user/login', [UserController::class, 'login']);
         Route::post('user/check/code', [UserController::class, 'check_otp']);
@@ -42,10 +44,12 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
         // Route::post('user/wishlist', [WishlistController::class, 'wishlist'])->middleware('checkUser:user-api');
         // Route::post('user/getAllWishlist', [WishlistController::class, 'getAllWishlist'])->middleware('checkUser:user-api', 'checkLang');
         // Route::post('user/is_like/product', [WishlistController::class, 'Is_like'])->middleware('checkUser:user-api');
-        
+
     });
 });
 
-    
+Route::get('getSpecialForYou',[\App\Http\Controllers\Api\SpecialForYou::class,'getSpecialForYou']);
+
+
 
 

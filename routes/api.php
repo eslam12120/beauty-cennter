@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\serviceController;
 use App\Http\Controllers\Api\SpecialForYou;
 use App\Http\Controllers\Api\Users\EditProfileController;
 use App\Http\Controllers\Api\Users\ForgotPasswordController;
@@ -46,6 +48,9 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
         // Route::post('user/is_like/product', [WishlistController::class, 'Is_like'])->middleware('checkUser:user-api');
 
     });
+
+    Route::get('services', [serviceController::class,'getAllServices'])->name('services');
+    Route::get('services_search/{search}', [SearchController::class,'servicesSearch'])->name('servicesSearch');
 });
 
 Route::get('getSpecialForYou',[\App\Http\Controllers\Api\SpecialForYou::class,'getSpecialForYou']);
@@ -53,4 +58,4 @@ Route::get('getAllCategories',[\App\Http\Controllers\Api\CategoryController::cla
 Route::get('getAllSpecialists',[\App\Http\Controllers\Api\SpecialistController::class,'getAllSpecialists']);
 Route::get('categorySpecialistSearch/{search}',[\App\Http\Controllers\Api\SearchController::class,'categorySpecialistSearch']);
 Route::get('specialistSearch/{search}',[\App\Http\Controllers\Api\SearchController::class,'specialistSearch']);
-Route::get('getUpcomingBookings',[\App\Http\Controllers\Api\BookingsController::class,'getUpcomingBookings'])
+Route::get('getUpcomingBookings',[\App\Http\Controllers\Api\BookingsController::class,'getUpcomingBookings']);

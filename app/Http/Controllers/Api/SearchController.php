@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\service;
 use App\Models\Specialist;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,16 @@ class SearchController extends Controller
         ->orWhere('rate','LIKE','%'.$search.'%')->get();
         return response()->json([
             'specialists' => $specialists
+        ]);
+    }
+    public function servicesSearch($search)
+    {
+        $services = service::where('service_name_en', 'LIKE','%' . $search . '%')
+        ->orWhere('service_name_ar', 'LIKE','%' . $search . '%')
+        ->orWhere('price',$search)
+        ->get();
+        return response()->json([
+            'services' => $services
         ]);
     }
 }

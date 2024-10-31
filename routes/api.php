@@ -50,7 +50,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
 
 Route::get('getSpecialForYou',[\App\Http\Controllers\Api\SpecialForYou::class,'getSpecialForYou']);
 Route::get('getAllCategories',[\App\Http\Controllers\Api\CategoryController::class,'getAllCategories']);
-
+Route::get('getAllSpecialists',[\App\Http\Controllers\Api\SpecialistController::class,'getAllSpecialists']);
 
 
 

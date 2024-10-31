@@ -10,7 +10,7 @@ class serviceController extends Controller
 {
     public function getAllServices()
     {
-        $allServices = service::with('category')->get()->map(function($service)
+        $allServices = service::with(['category' , 'specialists'])->get()->map(function($service)
         {
             $service['date'] = $service->created_at->diffForHumans();
             $service['img_url'] = asset('services_images/' . $service->image);

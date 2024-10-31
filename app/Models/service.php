@@ -13,4 +13,9 @@ class service extends Model
     {
         return $this->belongsTo(Category::class , 'category_id');
     }
+
+    function specialists()
+    {
+        return $this->belongsToMany(Specialist::class , 'service_specialities' , 'service_id' , 'specialist_id' );
+    }
 }

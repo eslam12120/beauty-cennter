@@ -12,4 +12,8 @@ class Specialist extends Model
     public function categories(){
         return $this->hasMany(Category::class,'category_id','id');
     }
+    function services()
+    {
+        return $this->belongsToMany(service::class , 'service_specialities' , 'specialist_id' , 'service_id' );
+    }
 }

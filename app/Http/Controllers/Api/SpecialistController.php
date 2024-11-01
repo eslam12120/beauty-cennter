@@ -17,4 +17,22 @@ class SpecialistController extends Controller
         });
         return response()->json($specialists->paginate(10));
     }
+
+    public function getSpecialistDataByID($id)
+    {
+        if(!empty($id))
+        {
+            $specialist = Specialist::with('services')->find($id);
+            if($specialist != null){
+                return response()->json($specialist);
+            }
+            else
+            {
+                return response()->json(['error' => 'Specialist Not Found']);
+            }
+        }
+        else{
+            return response()->json(['error' => 'Specialist Id Is Empty']);
+        }
+    }
 }

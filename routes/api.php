@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\serviceController;
 use App\Http\Controllers\Api\SpecialForYou;
+use App\Http\Controllers\Api\SpecialistController;
 use App\Http\Controllers\Api\Users\EditProfileController;
 use App\Http\Controllers\Api\Users\ForgotPasswordController;
 use App\Http\Controllers\Api\Users\ResetPasswordController;
@@ -50,6 +51,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
     });
 
     Route::get('services', [serviceController::class,'getAllServices'])->name('services');
+    Route::get('specialist/{id}', [SpecialistController::class,'getSpecialistDataByID'])->name('getSpecialistDataByID');
     Route::get('services_search/{search}', [SearchController::class,'servicesSearch'])->name('servicesSearch');
 });
 

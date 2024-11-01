@@ -50,8 +50,10 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
 
     });
 
+    //El_Mohamady
     Route::get('services', [serviceController::class,'getAllServices'])->name('services');
-    Route::get('specialist/{id}', [SpecialistController::class,'getSpecialistDataByID'])->name('getSpecialistDataByID');
+    Route::get('specialist/{id}', [SpecialistController::class,'getSpecialistDataById'])->name('getSpecialistDataById');
+    Route::get('category_services/{catId}', [serviceController::class,'getAllServicesByCatId'])->name('getAllServicesByCatId');
     Route::get('services_search/{search}', [SearchController::class,'servicesSearch'])->name('servicesSearch');
 });
 

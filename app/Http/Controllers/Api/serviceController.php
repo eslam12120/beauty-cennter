@@ -20,4 +20,17 @@ class serviceController extends Controller
             'services' => $allServices
         ]);
     }
+
+    public function getAllServicesByCatId($catId)
+    {
+        $allCategoryServices = service::where('category_id',$catId)->get()->map(function($service)
+        {
+            $service['date'] = $service->created_at->diffForHumans();
+            $service['img_url'] = asset('services_images/' . $service->image);
+            return $service;
+        });
+        return response()->json([
+            'category services' => $allCategoryServices
+        ]);
+    }
 }

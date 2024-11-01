@@ -12,4 +12,8 @@ class Category extends Model
     public function specialists(){
         return $this->hasMany(Specialist::class);
     }
+
+    public function services(){
+        return $this->hasMany(service::class);
+    }
 }

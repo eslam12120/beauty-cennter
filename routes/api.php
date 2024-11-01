@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\NotificationsController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\serviceController;
 use App\Http\Controllers\Api\SpecialForYou;
@@ -52,6 +53,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
 
     //El_Mohamady
     Route::get('services', [serviceController::class,'getAllServices'])->name('services');
+    Route::get('user_notifications', [NotificationsController::class,'userNotifications'])->name('userNotifications');
     Route::get('specialist/{id}', [SpecialistController::class,'getSpecialistDataById'])->name('getSpecialistDataById');
     Route::get('category_services/{catId}', [serviceController::class,'getAllServicesByCatId'])->name('getAllServicesByCatId');
     Route::get('services_search/{search}', [SearchController::class,'servicesSearch'])->name('servicesSearch');

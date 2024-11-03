@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('fav_services', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->text('body')->nullable();
-            $table->bigInteger('sender_id')->index()->nullable();
-            $table->bigInteger('receiver_id')->index()->nullable();
-            $table->Integer('is_read')->index()->nullable();
+            $table->bigInteger('service_id')->unsigned();
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('fav_services');
     }
 };

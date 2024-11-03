@@ -9,13 +9,26 @@ use Illuminate\Http\Request;
 class SpecialistController extends Controller
 {
 
-    public function getAllSpecialists(){
-        $specialists = Specialist::all()->map(function ($specialist){
+    public function getAllSpecialists(Request $request)
+    {
+        // Use a query builder to paginate the specialists
+        $specialists = Specialist::with(['categories' => function ($q) {
+            // Use the app locale for category name
+            $q->select('id', 'name_' . app()->getLocale() . ' as name');
+        }])
+            ->paginate(10); // Perform pagination here
+
+        // Map over the specialists to add the image_url
+        $specialists->getCollection()->transform(function ($specialist) {
             $specialist->image_url = asset('special_images/' . $specialist->image);
-            $specialist->name_en = $specialist->categories->name_en;
             return $specialist;
         });
-        return response()->json($specialists->paginate(10));
+
+        // Return the paginated response
+        return response()->json([
+            'message' => 'success',
+            'data' => $specialists,
+        ], 200);
     }
 
     public function getSpecialistDataByID($id)

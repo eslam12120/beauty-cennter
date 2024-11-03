@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories','id')->onDelete('cascade');
             $table->integer('price')->nullable();
             $table->string('image')->nullable();
-            $table->boolean('favorite')->default(0);
+            $table->string('session_time')->nullable();
             $table->timestamps();
         });
     }

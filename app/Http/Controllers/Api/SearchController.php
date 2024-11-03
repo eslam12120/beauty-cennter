@@ -10,31 +10,32 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function categorySpecialistSearch($search){
-        $categories = Category::where('name_en','LIKE','%'.$search.'%')->get();
-        $specialists = Specialist::where('name','LIKE','%'.$search.'%')
-        ->orWhere('rate','LIKE','%'.$search.'%')->get();
-
+    public function categorySpecialistSearch(Request $request){
+        $categories = Category::where('name_en','LIKE','%'.$request->search.'%')->orWhere('name_ar','LIKE','%'.$request->search.'%')->get();
+        $specialists = Specialist::where('name','LIKE','%'.$request->search.'%')
+        ->get();
         return response()->json([
+            'message'=>'success',
             'categories' => $categories,
             'specialists' => $specialists
         ]);
     }
-    public function specialistSearch($search){
-        $specialists = Specialist::where('name','LIKE','%'.$search.'%')
-        ->orWhere('rate','LIKE','%'.$search.'%')->get();
+    public function specialistSearch(Request $request){
+        $specialists = Specialist::where('name','LIKE','%'.$request->search.'%')->get();
         return response()->json([
-            'specialists' => $specialists
+            'message'=>'success',
+            'data' => $specialists
         ]);
     }
-    public function servicesSearch($search)
+    public function servicesSearch(Request $request)
     {
-        $services = service::where('service_name_en', 'LIKE','%' . $search . '%')
-        ->orWhere('service_name_ar', 'LIKE','%' . $search . '%')
-        ->orWhere('price',$search)
-        ->get();
+        $services = service::when($request->search, function ($query, $search) {
+            $query->where('service_name_en', 'LIKE', '%' . $search . '%')
+                ->orWhere('service_name_ar', 'LIKE', '%' . $search . '%');
+        })->get();
         return response()->json([
-            'services' => $services
+            'message'=>'success',
+            'data' => $services
         ]);
     }
 }

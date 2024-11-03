@@ -11,7 +11,9 @@ class service extends Model
 
     function Category()
     {
-        return $this->belongsTo(Category::class , 'category_id');
+
+            return $this->belongsTo(Category::class, 'category_id');
+
     }
 
     function specialists()

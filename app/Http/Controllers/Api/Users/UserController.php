@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Users;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OtpCode;
 use App\Models\User;
 use App\Models\UserVerification;
 use Exception;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -57,7 +59,7 @@ class UserController extends Controller
 
 
         // Send email to user
-        // Mail::to($request->email)->send(new SendCodeResetPassword($code));
+     //    Mail::to($request->email)->send(new OtpCode($code));
 
         // return Response::json(array(
         //     'status'=>200,
@@ -123,7 +125,7 @@ class UserController extends Controller
 
 
             // Send email to user
-            // Mail::to($request->email)->send(new SendCodeResetPassword($code));
+          //  Mail::to($request->email)->send(new OtpCode($code));
 
             // return Response::json(array(
             //     'status'=>200,
@@ -166,7 +168,12 @@ class UserController extends Controller
             return response()->json(['message' => $validator->errors()->first()],422);
         }
         $user=User::where('email',$request->email)->first();
-         $user_otp=UserVerification::where('user_id', $user->id)->first();
+         $user_otp=UserVerification::where('user_id', $user->id)->latest()->first();
+         if(!$user_otp){
+
+             return response()->json(['message' => "هناك خطا في الكود"], 422);
+
+         }
 
         if($user_otp->code==$request->code)
         {
@@ -177,7 +184,10 @@ class UserController extends Controller
             return $this->respondWithToken($token);
 
         } else {
+
             return response()->json(['message' => "هناك خطا في الكود"], 422);
+
+
         }
 
     }

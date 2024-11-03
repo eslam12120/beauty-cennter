@@ -10,7 +10,7 @@ class Specialist extends Model
     use HasFactory;
 
     public function categories(){
-        return $this->hasMany(Category::class,'category_id','id');
+        return $this->belongsTo(Category::class,'category_id');
     }
     function services()
     {

@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->text('password');
+            $table->text('password')->nullable();
             $table->text('image')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->enum('is_completed', ['0', '1'])->default('0');
             $table->enum('sign_in_type', ['google', 'apple','normal'])->default('normal');
             $table->text('device_token')->nullable();
+            $table->enum('is_notify_offer', ['0', '1'])->default('1');
+            $table->enum('is_notify_booking', ['0', '1'])->default('1');
             $table->rememberToken();
             $table->timestamps();
 

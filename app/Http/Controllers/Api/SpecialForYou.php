@@ -9,11 +9,15 @@ use Illuminate\Http\Request;
 class SpecialForYou extends Controller
 {
     public function getSpecialForYou(){
-
-        $specialForYou = ModelsSpecialForYou::all()->map(function($special){
-            $special->imageUrl =   $special->image_url = asset('special_images/' . $special->image);
+        $specialForYou = ModelsSpecialForYou::paginate(10)->through(function($special) {
+            // Set only image_url
+            $special->image_url = asset('special_images/' . $special->image);
             return $special;
         });
-        return response()->json($specialForYou);
+
+        return response()->json([
+            'message' => 'success',
+            'data' => $specialForYou
+        ], 200);
     }
 }

@@ -21,12 +21,12 @@ class EditProfileController extends Controller
 
                 'name'=>'required|string',
                 'date_of_birth'=>'required|string',
-                'image' => 'required',
+             //   'image' => 'required',
             ]
         ,[
             'name.required'=>trans('editProfile.nameRequired'),
             'name.string'=>trans('editProfile.nameString'),
-            'image.required'=>trans('editProfile.photoRequired'),
+     //       'image.required'=>trans('editProfile.photoRequired'),
 
         ]);
         if ($validator->fails()) {

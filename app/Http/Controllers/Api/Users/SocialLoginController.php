@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class SocialLoginController extends Controller
@@ -29,16 +30,28 @@ class SocialLoginController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 422);
         }
         $user = User::where('email', $request->email)->first();
-        $user->update([
-            'sign_in_type' =>$request->type,
-        ]);
+        if($user) {
+            $user->update([
+                'sign_in_type' => $request->type,
+                'device_token' => $request->device_token,
+            ]);
 
 
-        $token = auth()->guard('user-api')->login($user);
+            $token = auth()->guard('user-api')->login($user);
 
 
+            return $this->respondWithToken($token);
+        }
+        else{
+            $user = User::create([
+                'email' => $request->email,
+                'device_token' => $request->device_token,
+                'sign_in_type' => $request->type,
+            ]);
 
-        return $this->respondWithToken($token);
+            $token = auth()->guard('user-api')->login($user);
+            return $this->respondWithToken($token);
+        }
     }
     protected function respondWithToken($token)
     {

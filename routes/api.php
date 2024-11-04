@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\serviceController;
 use App\Http\Controllers\Api\SpecialForYou;
 use App\Http\Controllers\Api\SpecialistController;
 use App\Http\Controllers\Api\Users\EditProfileController;
+use App\Http\Controllers\Api\Users\FeedbackController;
 use App\Http\Controllers\Api\Users\ForgotPasswordController;
 use App\Http\Controllers\Api\Users\ResetPasswordController;
 use App\Http\Controllers\Api\Users\SocialLoginController;
@@ -59,7 +60,10 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
                Route::post('add/specialist/to/wishlist', [WishlistForSpecialistController::class, 'specialist_wishlist']);
 
                Route::post('turn/notify', [HomeController::class, 'turn_notify']);
-
+        Route::get('services', [serviceController::class, 'getAllServices'])->name('services');
+        Route::get('getAllSpecialists', [\App\Http\Controllers\Api\SpecialistController::class, 'getAllSpecialists']);
+        Route::post('user/add/feedback', [FeedbackController::class, 'add_feedback']);
+        Route::get('getfeedbacks', [FeedbackController::class, 'get_all_feedbacks']);
 
 
 
@@ -67,7 +71,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
     });
 
     //El_Mohamady
-    Route::get('services', [serviceController::class,'getAllServices'])->name('services');
+    
     Route::get('specialist/{id}', [SpecialistController::class,'getSpecialistDataById'])->name('getSpecialistDataById');
     Route::get('category_services/{catId}', [serviceController::class,'getAllServicesByCatId'])->name('getAllServicesByCatId');
     Route::post('search/services', [SearchController::class,'servicesSearch'])->name('servicesSearch');
@@ -75,7 +79,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
 
 Route::get('getSpecialForYou',[\App\Http\Controllers\Api\SpecialForYou::class,'getSpecialForYou']);
 Route::get('getAllCategories',[\App\Http\Controllers\Api\CategoryController::class,'getAllCategories']);
-Route::get('getAllSpecialists',[\App\Http\Controllers\Api\SpecialistController::class,'getAllSpecialists']);
+
 Route::post('categorySpecialistSearch',[\App\Http\Controllers\Api\SearchController::class,'categorySpecialistSearch']);
 Route::post('specialistSearch',[\App\Http\Controllers\Api\SearchController::class,'specialistSearch']);
 

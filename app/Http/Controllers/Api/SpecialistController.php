@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\FavSpecialist;
 use App\Models\Specialist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SpecialistController extends Controller
 {
@@ -22,6 +24,15 @@ class SpecialistController extends Controller
         $specialists->getCollection()->transform(function ($specialist) {
             $specialist->image_url = asset('special_images/' . $specialist->image);
             return $specialist;
+        });
+        $specialists->map(function ($specialists) {
+
+            $total = FavSpecialist::where('specialist_id', $specialists->id)->where('user_id', Auth::guard('user-api')->user()->id)->count();
+            if ($total == 0) {
+                $specialists['is_fav'] = 0;
+            } else {
+                $specialists['is_fav'] = 1;
+            }
         });
 
         // Return the paginated response

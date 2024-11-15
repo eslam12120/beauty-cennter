@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('specialists', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('Rate');
-            $table->string('image');
+            $table->string('name')->nullable();
+            $table->string('Rate')->nullable();
+            $table->text('image')->nullable();
             $table->foreignId('category_id')->references('id')->on('categories')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();
         });

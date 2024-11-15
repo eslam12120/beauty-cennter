@@ -9,6 +9,9 @@ class BookingsController extends Controller
 {
     public function getUpcomingBookings(){
         $bookings = Booking::where('status','pending')->get();
+
+        $bookings = Booking::where('status','pending')->get();
+
         return response()->json($bookings);
     }
 }

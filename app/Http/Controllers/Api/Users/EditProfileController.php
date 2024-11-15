@@ -42,7 +42,7 @@ class EditProfileController extends Controller
                 if($request->hasFile('photo'))
                     {
 
-                    $photo=$request->file('image');
+                    $photo=$request->file('photo');
                     $ext=$photo->getClientOriginalName();
                     $name="user-".uniqid().".$ext";
                     $photo->move(public_path('images/users'),$name);

@@ -26,17 +26,17 @@ class CheckUserApi
                 JWTAuth::parseToken()->authenticate();
             } catch (Exception $exception) {
                 if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
-                    return response()->json('Invalid Exception');
+                    return response()->json('Invalid Exception',401);
                 } else if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
-                    return response()->json('Expired Exception');
+                    return response()->json('Expired Exception',401);
                 } else {
-                    return response()->json('please login and return go to request ');
+                    return response()->json('please login and return go to request',401);
                 }
             }
             return $next($request);
         }
-        return response()->json('please login and return go to request , Invalid Token Freelancer');
+        return response()->json('please login and return go to request , Invalid Token',401);
 
-        return response()->json('Enter Token');
+        return response()->json('Enter Token',401);
     }
 }

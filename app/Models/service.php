@@ -9,15 +9,16 @@ class service extends Model
 {
     use HasFactory;
 
-    function Category()
+ public function Category()
     {
 
             return $this->belongsTo(Category::class, 'category_id');
 
     }
 
-    function specialists()
-    {
-        return $this->belongsToMany(Specialist::class , 'service_specialities' , 'service_id' , 'specialist_id' );
-    }
+
+    public function specialists()
+{
+    return $this->belongsToMany(Specialist::class, 'service_specialities', 'service_id', 'specialist_id');
+}
 }

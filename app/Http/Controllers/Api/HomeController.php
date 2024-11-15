@@ -23,14 +23,14 @@ class HomeController extends Controller
         $lang = $request->lang; // or default to 'ar' based on user preference
         $nameColumn = $lang === 'ar' ? 'name_ar' : 'name_en';
 
-        $categories = Category::select('id', $nameColumn . ' as name')->take(5)->latest()->get()
+        $categories = Category::select('id', $nameColumn . ' as name','image')->take(5)->latest()->get()
             ->map(function ($category) {
                 $category->image_url = asset('categories_images/' . $category->image);
                 return $category;
             });
 
         $specialists = Specialist::with(['categories' => function ($q) use ($lang) {
-            $q->select('id', 'name_' . $lang . ' as name');
+            $q->select('id', 'name_' . $lang . ' as name','image');
         }])
             ->take(5)->latest()->get()
             ->map(function ($specialist) {

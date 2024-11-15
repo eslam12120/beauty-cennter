@@ -35,7 +35,7 @@ class WishlistForSpecialistController extends Controller
                 'message' => trans('msg.message'),
             ]);
         } else {
-            Favspecialist::where('patient_id', Auth::guard('user-api')->user()->id)->where('user_id', $request->user_id)->delete();
+            Favspecialist::where('user_id', Auth::guard('user-api')->user()->id)->where('specialist_id', $request->specialist_id)->delete();
             return Response::json(array(
                 'status' => 200,
                 'message' => trans('msg.messageRemove'),

@@ -168,19 +168,21 @@ class UserController extends Controller
             return response()->json(['message' => $validator->errors()->first()],422);
         }
         $user=User::where('email',$request->email)->first();
+        if(!$user){
+             return response()->json(['message' => "هناك خطا في البريد الالكتروني "],422);
+        }
+            
          $user_otp=UserVerification::where('user_id', $user->id)->latest()->first();
          if(!$user_otp){
-
              return response()->json(['message' => "هناك خطا في الكود"], 422);
-
          }
 
         if($user_otp->code==$request->code)
         {
             $token = auth()->guard('user-api')->login($user);
-
             $user_otp->delete();
-
+            $user->device_token = $request->device_token;
+            $user->save();
             return $this->respondWithToken($token);
 
         } else {
@@ -219,6 +221,9 @@ class UserController extends Controller
     public function getUserData()
     {
         $user = User::where('id', Auth::guard('user-api')->user()->id)->first();
+if ($user) {
+    $user->image = asset('images/users/' . $user->image);
+}
         return Response::json(array(
             'status' => 200,
             'message' => 'true',

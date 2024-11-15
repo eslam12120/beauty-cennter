@@ -35,9 +35,9 @@ class WishlistController extends Controller
                 'message' => trans('msg.message'),
             ]);
         } else {
-            FavServices::where('patient_id', Auth::guard('user-api')->user()->id)->where('user_id', $request->user_id)->delete();
+            FavServices::where('user_id', Auth::guard('user-api')->user()->id)->where('service_id', $request->service_id)->delete();
             return Response::json(array(
-                'status' => 200,
+                'status' => '200',
                 'message' => trans('msg.messageRemove'),
             ));
         }

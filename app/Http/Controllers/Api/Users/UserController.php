@@ -33,55 +33,52 @@ class UserController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->first()],422);
+            return response()->json(['message' => $validator->errors()->first()], 422);
         }
 
         DB::beginTransaction();
         try {
 
-        $user = User::create([
+            $user = User::create([
 
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'device_token' => $request->device_token,
-            'phone' => $request->phone,
-        ]);
-        $code = mt_rand(100000, 999999);
-        $user_verification = UserVerification::create([
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'device_token' => $request->device_token,
+                'phone' => $request->phone,
+            ]);
+            $code = mt_rand(100000, 999999);
+            $user_verification = UserVerification::create([
 
-            'user_id' => $user->id,
-            'code' =>$code,
-
-
-
-        ]);
+                'user_id' => $user->id,
+                'code' => $code,
 
 
-        // Send email to user
-     //    Mail::to($request->email)->send(new OtpCode($code));
 
-        // return Response::json(array(
-        //     'status'=>200,
-        //     'message'=>'true',
-        //     'data'=>$allwishlist,
-        // ));
-        DB::commit();
+            ]);
 
-        return response()->json([
-            'code'=>$code,
-            'status' => '200',
-            'message' => trans('auth.register.success'),
-            'user' => $user,
-        ]);
+
+            // Send email to user
+            //    Mail::to($request->email)->send(new OtpCode($code));
+
+            // return Response::json(array(
+            //     'status'=>200,
+            //     'message'=>'true',
+            //     'data'=>$allwishlist,
+            // ));
+            DB::commit();
+
+            return response()->json([
+                'code' => $code,
+                'status' => '200',
+                'message' => trans('auth.register.success'),
+                'user' => $user,
+            ]);
         } catch (Exception $e) {
             // Rollback all operations if an error occurs
             DB::rollBack();
 
             return response()->json(['error' => 'Failed to create user: ' . $e->getMessage()], 500);
         }
-
-
-
     }
     public function login(Request $request)
     {
@@ -97,7 +94,7 @@ class UserController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->first()],422);
+            return response()->json(['message' => $validator->errors()->first()], 422);
         }
         DB::beginTransaction();
         try {
@@ -107,24 +104,24 @@ class UserController extends Controller
                 return response()->json(['message' => trans('auth.login.failed')], 401);
             }
 
-        $user = User::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
             $user->device_token = $request->device_token;
             $user->save();
 
-        $code = mt_rand(100000, 999999);
-        $user_verification = UserVerification::create([
+            $code = mt_rand(100000, 999999);
+            $user_verification = UserVerification::create([
 
-            'user_id' => $user->id,
-            'code' => $code,
+                'user_id' => $user->id,
+                'code' => $code,
 
 
 
-        ]);
+            ]);
 
 
 
             // Send email to user
-          //  Mail::to($request->email)->send(new OtpCode($code));
+            //  Mail::to($request->email)->send(new OtpCode($code));
 
             // return Response::json(array(
             //     'status'=>200,
@@ -133,19 +130,18 @@ class UserController extends Controller
             // ));
 
             DB::commit();
-        return response()->json([
-            'code' => $code,
-            'status' => '200',
+            return response()->json([
+                'code' => $code,
+                'status' => '200',
 
-            'email'=>$request->email,
-        ]);
+                'email' => $request->email,
+            ]);
         } catch (Exception $e) {
             // Rollback all operations if an error occurs
             DB::rollBack();
 
             return response()->json(['error' => 'Failed to create user: ' . $e->getMessage()], 500);
         }
-
     }
     public function check_otp(Request $request)
     {
@@ -153,7 +149,7 @@ class UserController extends Controller
             $request->all(),
             [
                 'code' => 'required',
-                'email'=>'required',
+                'email' => 'required',
 
             ],
             [
@@ -164,33 +160,28 @@ class UserController extends Controller
             ]
         );
         if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->first()],422);
+            return response()->json(['message' => $validator->errors()->first()], 422);
         }
-        $user=User::where('email',$request->email)->first();
-        if(!$user){
-             return response()->json(['message' => "هناك خطا في البريد الالكتروني "],422);
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json(['message' => "هناك خطا في البريد الالكتروني "], 422);
         }
 
-         $user_otp=UserVerification::where('user_id', $user->id)->latest()->first();
-         if(!$user_otp){
-             return response()->json(['message' => "هناك خطا في الكود"], 422);
-         }
+        $user_otp = UserVerification::where('user_id', $user->id)->latest()->first();
+        if (!$user_otp) {
+            return response()->json(['message' => "هناك خطا في الكود"], 422);
+        }
 
-        if($user_otp->code==$request->code)
-        {
+        if ($user_otp->code == $request->code) {
             $token = auth()->guard('user-api')->login($user);
             $user_otp->delete();
             $user->device_token = $request->device_token;
             $user->save();
             return $this->respondWithToken($token);
-
         } else {
 
             return response()->json(['message' => "هناك خطا في الكود"], 422);
-
-
         }
-
     }
     protected function respondWithToken($token)
     {
@@ -210,19 +201,19 @@ class UserController extends Controller
 
                 JWTAuth::setToken($token)->invalidate(); //logout
             } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-                return  $this->returnError('', 'some thing went wrongs');
+                return response()->json(['message' => "something went wrong"], 422);
             }
             return response()->json(['message' => trans('auth.logout.success')]);
         } else {
-            $this->returnError('', 'some thing went wrongs');
+            return response()->json(['message' => "something went wrong"], 422);
         }
     }
     public function getUserData()
     {
         $user = User::where('id', Auth::guard('user-api')->user()->id)->first();
-if ($user) {
-    $user->image = asset('images/users/' . $user->image);
-}
+        if ($user) {
+            $user->image = asset('images/users/' . $user->image);
+        }
         return Response::json(array(
             'status' => 200,
             'message' => 'true',

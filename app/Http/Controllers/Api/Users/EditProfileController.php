@@ -17,89 +17,89 @@ class EditProfileController extends Controller
     public function Editprofile(Request $request)
     {
 
-            $validator = Validator::make($request->all(),[
+        $validator = Validator::make(
+            $request->all(),
+            [
 
-                'name'=>'required|string',
-                'date_of_birth'=>'required|string',
-             //   'image' => 'required',
+                'name' => 'required|string',
+                'date_of_birth' => 'required|string',
+                //   'image' => 'required',
+            ],
+            [
+                'name.required' => trans('editProfile.nameRequired'),
+                'name.string' => trans('editProfile.nameString'),
+                //       'image.required'=>trans('editProfile.photoRequired'),
+
             ]
-        ,[
-            'name.required'=>trans('editProfile.nameRequired'),
-            'name.string'=>trans('editProfile.nameString'),
-     //       'image.required'=>trans('editProfile.photoRequired'),
-
-        ]);
+        );
         if ($validator->fails()) {
             return response()->json([
-                'message'=>$validator->errors()->first(),'status'=> 422
+                'message' => $validator->errors()->first(),
+                'status' => 422
             ]);
         }
 
         try {
-            $user=User::where('id',Auth::guard('user-api')->user()->id)->first();
+            $user = User::where('id', Auth::guard('user-api')->user()->id)->first();
             DB::beginTransaction();
-                $name=$user->image;
-                if($request->hasFile('photo'))
-                    {
+            $name = $user->image;
+            if ($request->hasFile('photo')) {
+                $photo = $request->file('photo');
+                $ext = $photo->getClientOriginalName();
+                $name = "user-" . uniqid() . ".$ext";
+                $photo->move(public_path('images/users'), $name);
+            }
 
-                    $photo=$request->file('photo');
-                    $ext=$photo->getClientOriginalName();
-                    $name="user-".uniqid().".$ext";
-                    $photo->move(public_path('images/users'),$name);
-                    }
-
-                        $users= User::where('id',auth('user-api')->user()->id)->update([
-                        'date_of_birth' => $request->date_of_birth,
-                        'name'=>$request->name,
-                        'is_completed'=>'1',
-                        'image'=>$name,
-                        ]);
-                        DB::commit();
-                        return Response::json(array(
-                            'status'=>200,
-                            'message'=>trans('msg.updateSuccess'),
-                        ));
-                    }
-                catch (Exception $e) {
+            $users = User::where('id', auth('user-api')->user()->id)->update([
+                'date_of_birth' => $request->date_of_birth,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'is_completed' => '1',
+                'image' => $name,
+            ]);
+            DB::commit();
+            return Response::json(array(
+                'status' => 200,
+                'message' => trans('msg.updateSuccess'),
+            ));
+        } catch (Exception $e) {
             // Rollback all operations if an error occurs
             DB::rollBack();
 
             return response()->json(['error' => 'Failed to create user: ' . $e->getMessage()], 500);
         }
-
     }
     public function change_password(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'old_password'=>'required',
-            'password'=>'required|max:100',
-            'confirm_password'=>'required|same:password'
-        ],[
+            'old_password' => 'required',
+            'password' => 'required|max:100',
+            'confirm_password' => 'required|same:password'
+        ], [
 
-            'password.required' =>trans('editProfile.passwordRequired'),
-            'confirm_password.required'=>trans('editProfile.confirm_passwordRequired'),
-            'confirm_password.same'=>trans('editProfile.confirm_passwordSame'),
+            'password.required' => trans('editProfile.passwordRequired'),
+            'confirm_password.required' => trans('editProfile.confirm_passwordRequired'),
+            'confirm_password.same' => trans('editProfile.confirm_passwordSame'),
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'message'=>$validator->errors()->first(),'status'=> 422
+                'message' => $validator->errors()->first(),
+                'status' => 422
             ]);
         }
-        $user=Auth::guard('user-api')->user();
+        $user = Auth::guard('user-api')->user();
 
-        if(Hash::check($request->old_password,$user->password)){
+        if (Hash::check($request->old_password, $user->password)) {
             User::findOrfail(Auth::guard('user-api')->user()->id)->update([
-                'password'=>Hash::make($request->password)
+                'password' => Hash::make($request->password)
             ]);
             return response()->json([
-                'message'=>trans('msg.pwSuccess'),
-            ],200);
-        }else
-        {
+                'message' => trans('msg.pwSuccess'),
+            ], 200);
+        } else {
             return response()->json([
-                'message'=>trans('msg.pwError'),
-            ],400);
+                'message' => trans('msg.pwError'),
+            ], 400);
         }
-
     }
 }

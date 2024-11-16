@@ -44,8 +44,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'device_token' => $request->device_token,
-
-
+            'phone' => $request->phone,
         ]);
         $code = mt_rand(100000, 999999);
         $user_verification = UserVerification::create([
@@ -171,7 +170,7 @@ class UserController extends Controller
         if(!$user){
              return response()->json(['message' => "هناك خطا في البريد الالكتروني "],422);
         }
-            
+
          $user_otp=UserVerification::where('user_id', $user->id)->latest()->first();
          if(!$user_otp){
              return response()->json(['message' => "هناك خطا في الكود"], 422);

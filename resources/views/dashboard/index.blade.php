@@ -97,7 +97,7 @@
                                         <h4>Number of Services</h4>
                                     </div>
                                     <div class="col-5 text-right">
-                                        <h4>{{ \App\Models\Service::count() }}</h4>
+                                        <h4>{{ \App\Models\service::count() }}</h4>
                                     </div>
                                 </div>
                             </div>

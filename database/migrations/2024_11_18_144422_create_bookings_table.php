@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('cart_bookings', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('specialist_id')->nullable();
             $table->bigInteger('service_id')->nullable();
             $table->bigInteger('category_id')->nullable();
             $table->Integer('time_id')->nullable();
             $table->Integer('time_specialist_id')->nullable();
+            $table->string('payment_type')->nullable();
             $table->bigInteger('user_id')->nullable();
-            $table->date('date')->nullable();
+            $table->Integer('remind_me')->default(0)->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cart_bookings');
+        Schema::dropIfExists('bookings');
     }
 };

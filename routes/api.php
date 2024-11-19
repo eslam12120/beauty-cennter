@@ -7,10 +7,11 @@ use App\Http\Controllers\Api\SpecialForYou;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\serviceController;
+use App\Http\Controllers\Api\BookingsController;
 use App\Http\Controllers\Api\SpecialistController;
 use App\Http\Controllers\Api\Users\UserController;
 use App\Http\Controllers\Api\NotificationsController;
-use App\Http\Controllers\Api\Users\FeedbackController;
+use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\Users\WishlistController;
 use App\Http\Controllers\Api\Users\EditProfileController;
 use App\Http\Controllers\Api\Users\SocialLoginController;
@@ -60,6 +61,37 @@ Route::group(['namespace' => 'Api', 'middleware' => 'checkLang'], function () {
 
         Route::post('turn/notify', [HomeController::class, 'turn_notify']);
 
+        //
+        Route::get('available/time', [BookingsController::class, 'get_available_days_time']);
+
+        Route::get('service/available/time', [BookingsController::class, 'get_available_services_days_time']);
+
+
+
+        Route::get('specialist/available/time', [BookingsController::class, 'get_available_specialist_days_time']);
+
+        Route::get('get/specialist/available/time', [BookingsController::class, 'get_available_specialist_days_time_by_id']);
+
+        //
+
+        Route::post('add/cart', [BookingsController::class, 'add_cart']);
+        Route::get('get/cart', [BookingsController::class, 'get_cart']);
+        Route::post('delete/cart', [BookingsController::class, 'delete_cart']);
+        Route::post('remind/me', [BookingsController::class, 'remind_me']);
+        Route::get('get/cart/id', [BookingsController::class, 'get_cart_by_id']);
+        Route::post('add/booking', [BookingsController::class, 'add_booking']);
+        Route::post('cancel/booking', [BookingsController::class, 'cancel_booking']);
+
+        Route::get('get/all/bookings', [BookingsController::class, 'getBookings']);
+
+
+
+        //
+
+        //
+
+
+        //
 
         Route::post('user/add/feedback', [FeedbackController::class, 'add_feedback']);
         Route::get('getfeedbacks', [FeedbackController::class, 'get_all_feedbacks']);

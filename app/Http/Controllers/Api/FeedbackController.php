@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Users;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserFeedback;
@@ -63,6 +63,15 @@ class FeedbackController extends Controller
     public function get_all_feedbacks()
     {
         $feedbacks = UserFeedback::with('user')->get();
+        $feedbacks->each(function ($item) {
+            if ($item->user) {
+                // Adjusting for single service relationship, not a collection
+                $item->user->image_url = $item->user->image
+                    ? asset('images/users/' . $item->user->image) // Assuming images are stored in a folder named `services_images` inside `public`
+                    : null; // Handle cases where the image is null
+            }
+        });
+
         return response()->json([
             'status' => '200',
             'data' => $feedbacks,

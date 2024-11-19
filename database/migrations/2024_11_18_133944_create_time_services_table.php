@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('time_services', function (Blueprint $table) {
             $table->id();
+            $table->integer('time_id')->index()->nullable();
+            $table->time('start_time')->nullable(); // Store time
+            $table->time('end_time')->nullable(); // Store time
+            $table->integer('service_id')->index()->default(1); // Flag if the time is booked
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('time_services');
     }
 };

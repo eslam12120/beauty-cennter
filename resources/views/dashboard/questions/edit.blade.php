@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('content')
 
 <div class="app-content content">
@@ -10,8 +9,8 @@
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">Specialists</a></li>
-                            <li class="breadcrumb-item active">Edit Specialist</li>
+                            <li class="breadcrumb-item"><a href="">Questions</a></li>
+                            <li class="breadcrumb-item active">Edit Question</li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +22,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Edit Specialist</h4>
+                                <h4 class="card-title" id="basic-layout-form">Edit Question</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -34,75 +33,82 @@
                                     </ul>
                                 </div>
                             </div>
-
                             @include('dashboard.includes.alerts.success')
                             @include('dashboard.includes.alerts.errors')
-
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" action="{{ route('specialist.update', $specialist->id) }}" method="POST" enctype="multipart/form-data">
+                                    <form class="form" action="{{ route('question.update', $question->id) }}" method="POST">
                                         @csrf
-                                        @method('POST') <!-- This is to use the PUT method for updating -->
+                                        @method('POST') <!-- For PUT request -->
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Specialist Information</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> Question Information</h4>
+
+                                            <!-- Question Arabic -->
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="name">Name</label>
-                                                        <input type="text" id="name" class="form-control" value="{{ old('name', $specialist->name) }}" placeholder="Enter name" name="name" required>
-                                                        @error('name')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="category_id">Category</label>
-                                                        <select name="category_id" class="form-control" required>
-                                                            <option value="">Select Category</option>
-                                                            @foreach($categories as $category)
-                                                            <option value="{{ $category->id }}" {{ $specialist->category_id == $category->id ? 'selected' : '' }}>
-                                                                {{ $category->name_en }}
-                                                            </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('category_id')
+                                                        <label for="question_ar">Question (Arabic)</label>
+                                                        <input type="text" id="question_ar" class="form-control"
+                                                            value="{{ old('title_ar', $question->title_ar) }}"
+                                                            placeholder="Enter Arabic question"
+                                                            name="title_ar" required>
+                                                        @error('title_ar')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
 
+                                                <!-- Question English -->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="question_en">Question (English)</label>
+                                                        <input type="text" id="question_en" class="form-control"
+                                                            value="{{ old('title_en', $question->title_en) }}"
+                                                            placeholder="Enter English question"
+                                                            name="title_en" required>
+                                                        @error('title_en')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
 
-
+                                            <!-- Answer Arabic -->
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="image">Image</label>
-                                                        <input type="file" name="image" class="form-control">
-                                                        @error('image')
+                                                        <label for="answer_ar">Answer (Arabic)</label>
+                                                        <textarea id="answer_ar" class="form-control"
+                                                            placeholder="Enter Arabic answer"
+                                                            name="content_ar" rows="4" required>{{ old('content_ar', $question->content_ar) }}</textarea>
+                                                        @error('content_ar')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
-                                                        @if($specialist->image)
-                                                        <div class="mt-2">
-                                                            <img src="{{ asset('special_images/' . $specialist->image) }}" style="width: 50px; height: 50px;" alt="Profile Image">
-                                                        </div>
-                                                        @else
-                                                        <span>No Image Available</span>
-                                                        @endif
                                                     </div>
                                                 </div>
 
-
+                                                <!-- Answer English -->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="answer_en">Answer (English)</label>
+                                                        <textarea id="answer_en" class="form-control"
+                                                            placeholder="Enter English answer"
+                                                            name="content_en" rows="4" required>{{ old('content_en', $question->content_en) }}</textarea>
+                                                        @error('content_en')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="form-actions">
-                                            <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
+                                            <button type="button" class="btn btn-warning mr-1"
+                                                onclick="history.back();">
                                                 <i class="ft-x"></i> Cancel
                                             </button>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Update Specialist
+                                                <i class="la la-check-square-o"></i> Update Question
                                             </button>
                                         </div>
                                     </form>

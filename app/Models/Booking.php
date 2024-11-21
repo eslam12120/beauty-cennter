@@ -38,4 +38,8 @@ class Booking extends Model
             'start_time'
         );
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id')->select('id', 'name', 'image');
+    }
 }

@@ -39,7 +39,7 @@ class SpecialistController extends Controller
                 $image = $request->file('image');
                 $ext = $image->getClientOriginalExtension();
                 $imageName = "specialist-" . uniqid() . ".$ext";
-                $image->move(public_path('images/specialists'), $imageName);
+                $image->move(public_path('special_images'), $imageName);
             }
 
             Specialist::create([
@@ -102,7 +102,7 @@ class SpecialistController extends Controller
             $image = $request->file('image');
             $ext = $image->getClientOriginalExtension();
             $filename = "specialist-" . uniqid() . ".$ext";
-            $image->move(public_path('images/specialists'), $filename);
+            $image->move(public_path('special_images'), $filename);
                 // Update the user's image path
                 $specialist->image = $filename;
                 $specialist->save();

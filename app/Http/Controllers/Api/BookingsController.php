@@ -6,6 +6,7 @@ use Exception;
 use Carbon\Carbon;
 use App\Models\Time;
 use App\Models\Booking;
+use App\Models\service;
 use App\Models\CartBooking;
 use App\Models\TimeService;
 use Illuminate\Http\Request;
@@ -53,10 +54,10 @@ class BookingsController extends Controller
     {
         $times = TimeService::with('time')->where('service_id', $request->service_id)->get();
 
-        $result = $times->map(function ($time) {
+        $result = $times->map(function ($time) use($request) {
             $start = Carbon::parse($time->start_time);
             $end = Carbon::parse($time->end_time);
-
+            $service_session_time=service::where('id',$request->service_id)->first()->session_time ?? null;
             // Handle cases where `end_time` is past midnight (e.g., "00:00:00")
             if ($end->lt($start)) {
                 $end->addDay();
@@ -66,7 +67,7 @@ class BookingsController extends Controller
             $timeSlots = [];
             while ($start->lt($end)) {
                 $timeSlots[] = $start->format('H:i:s');
-                $start->addHour(); // Increment by one hour
+                $start->addMinutes($service_session_time);
             }
 
             return [

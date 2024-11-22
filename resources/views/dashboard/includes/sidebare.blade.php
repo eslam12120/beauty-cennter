@@ -68,7 +68,7 @@
                                    <i class="la la-cogs"></i> <!-- Add appropriate icon for services -->
                                    <span class="menu-title" data-i18n="nav.dash.main">Services</span>
                                    <span class="badge badge-danger badge-pill float-right mr-2">
-                                          {{ App\Models\Service::count() }} <!-- Count the number of services -->
+                                          {{ App\Models\service::count() }} <!-- Count the number of services -->
                                    </span>
                             </a>
                             <ul class="menu-content">

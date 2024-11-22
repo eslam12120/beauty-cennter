@@ -54,10 +54,10 @@ class BookingsController extends Controller
     {
         $times = TimeService::with('time')->where('service_id', $request->service_id)->get();
 
-        $result = $times->map(function ($time) use($request) {
+        $result = $times->map(function ($time) use ($request) {
             $start = Carbon::parse($time->start_time);
             $end = Carbon::parse($time->end_time);
-            $service_session_time=service::where('id',$request->service_id)->first()->session_time ?? null;
+            $service_session_time = service::where('id', $request->service_id)->first()->session_time ?? null;
             // Handle cases where `end_time` is past midnight (e.g., "00:00:00")
             if ($end->lt($start)) {
                 $end->addDay();
@@ -121,6 +121,7 @@ class BookingsController extends Controller
     {
         $lang = $request->lang ?? 'en'; // Default to 'en' if no lang is provided
 
+        // Retrieve times and associated data
         $times = TimeSpecialist::with([
             'specialist.category' => function ($query) use ($lang) {
                 $query->select(
@@ -128,17 +129,32 @@ class BookingsController extends Controller
                     $lang === 'en' ? 'name_en as name' : 'name_ar as name'
                 );
             },
-        ])->where('service_id', $request->service_id)
+        ])
+            ->where('service_id', $request->service_id)
             ->where('specialist_id', $request->specialist_id)
             ->where('time_id', $request->time_id)
             ->get();
-        $result = $times->filter(function ($time) use ($request) {
+
+        // Filter available times
+        $availableTimes = $times->filter(function ($time) use ($request) {
             return !Booking::where('specialist_id', $request->specialist_id)
                 ->where('service_id', $request->service_id)
                 ->where('time_id', $request->time_id)
-                ->where('time_specialist_id', $time->id)->whereDate('date', $request->date)->where('status', 'upcoming')
+                ->where('time_specialist_id', $time->id)
+                ->whereDate('date', $request->date)
+                ->where('status', 'upcoming')
                 ->exists();
-        })->map(function ($time) {
+        });
+
+        // If no available times, return a 422 status
+        if ($availableTimes->isEmpty()) {
+            return response()->json([
+                'message' => 'The requested time slot is unavailable.',
+            ], 422);
+        }
+
+        // Map available times to the desired structure
+        $result = $availableTimes->map(function ($time) {
             return [
                 'id' => $time->id,
                 'time_id' => $time->time_id,
@@ -147,10 +163,13 @@ class BookingsController extends Controller
                 'specialist_id' => $time->specialist_id,
             ];
         });
+
+        // Return response with available times
         return response()->json([
             'data' => $result->values(), // Ensure the response is a sequential array
         ], 200);
     }
+
 
 
 
@@ -218,7 +237,8 @@ class BookingsController extends Controller
                     'image'
                 );
             },
-            'time_specialist'
+            'time_specialist',
+            'specialist'
         ])->where('user_id', Auth::id())->get();
 
         // Add the base URL to the `image` field

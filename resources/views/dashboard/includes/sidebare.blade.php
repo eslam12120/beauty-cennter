@@ -62,6 +62,94 @@
                                    </li>
                             </ul>
                      </li>
+                     <!-- New Services Section -->
+                     <li class="nav-item">
+                            <a href="">
+                                   <i class="la la-cogs"></i> <!-- Add appropriate icon for services -->
+                                   <span class="menu-title" data-i18n="nav.dash.main">Services</span>
+                                   <span class="badge badge-danger badge-pill float-right mr-2">
+                                          {{ App\Models\Service::count() }} <!-- Count the number of services -->
+                                   </span>
+                            </a>
+                            <ul class="menu-content">
+                                   <li>
+                                          <a class="menu-item" href="{{ route('services.index') }}" data-i18n="nav.dash.ecommerce">All Services</a>
+                                   </li>
+                                   <li>
+                                          <a class="menu-item" href="{{ route('services.create') }}" data-i18n="nav.dash.crypto">Add New Service</a>
+                                   </li>
+                            </ul>
+                     </li>
+                     <!-- New Times Section -->
+                     <li class="nav-item">
+                            <a href="">
+                                   <i class="la la-cogs"></i> <!-- Add appropriate icon for services -->
+                                   <span class="menu-title" data-i18n="nav.dash.main">Times</span>
+                                   <span class="badge badge-danger badge-pill float-right mr-2">
+                                          {{ App\Models\Time::count() }} <!-- Count the number of services -->
+                                   </span>
+                            </a>
+                            <ul class="menu-content">
+                                   <li>
+                                          <a class="menu-item" href="{{ route('time.index') }}" data-i18n="nav.dash.ecommerce">Times</a>
+                                   </li>
+
+                            </ul>
+                     </li>
+                     <!-- New Booking Section -->
+                     <li class="nav-item">
+                            <a href="">
+                                   <i class="la la-cogs"></i> <!-- Add appropriate icon for services -->
+                                   <span class="menu-title" data-i18n="nav.dash.main">Booking</span>
+                                   <span class="badge badge-danger badge-pill float-right mr-2">
+                                          {{ App\Models\Booking::count() }} <!-- Count the number of services -->
+                                   </span>
+                            </a>
+                            <ul class="menu-content">
+                                   <li>
+                                          <a class="menu-item" href="{{ route('bookings.index') }}" data-i18n="nav.dash.ecommerce">Booking List</a>
+                                   </li>
+
+                            </ul>
+                     </li>
+                     <!-- New Questions Section -->
+                     <li class="nav-item">
+                            <a href="">
+                                   <i class="la la-cogs"></i> <!-- Add appropriate icon for services -->
+                                   <span class="menu-title" data-i18n="nav.dash.main">Questions</span>
+                                   <span class="badge badge-danger badge-pill float-right mr-2">
+                                          {{ App\Models\Question::count() }} <!-- Count the number of services -->
+                                   </span>
+                            </a>
+                            <ul class="menu-content">
+                                   <li>
+                                          <a class="menu-item" href="{{ route('question.index') }}" data-i18n="nav.dash.ecommerce">Question & Answers</a>
+                                   </li>
+                                   <li>
+                                          <a class="menu-item" href="{{ route('question.create') }}" data-i18n="nav.dash.crypto">Add New Question</a>
+                                   </li>
+
+                            </ul>
+                     </li>
+                     <!-- New Contacts Section -->
+                     <li class="nav-item">
+                            <a href="">
+                                   <i class="la la-cogs"></i> <!-- Add appropriate icon for services -->
+                                   <span class="menu-title" data-i18n="nav.dash.main">Contacts</span>
+                                   <span class="badge badge-danger badge-pill float-right mr-2">
+                                          {{ App\Models\ContactUs::count() }} <!-- Count the number of services -->
+                                   </span>
+                            </a>
+                            <ul class="menu-content">
+                                   <li>
+                                          <a class="menu-item" href="{{ route('contact.index') }}" data-i18n="nav.dash.ecommerce">Contact Us</a>
+                                   </li>
+                                   <li>
+                                          <a class="menu-item" href="{{ route('contact.create') }}" data-i18n="nav.dash.crypto">Add New Contact Us</a>
+                                   </li>
+
+                            </ul>
+                     </li>
 
                      <!-- New Feedback Section -->
                      <li class="nav-item">
@@ -78,6 +166,7 @@
                                    </li>
                             </ul>
                      </li>
+
 
                      <li class="navigation-header"></li>
               </ul>

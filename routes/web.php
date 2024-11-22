@@ -1,11 +1,15 @@
 <?php
 
-
+use App\Http\Controllers\Dashboard\BookingController;
+use App\Http\Controllers\Dashboard\ServicesController;
 use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\FeedbackController;
 use App\Http\Controllers\Dashboard\LoginController;
+use App\Http\Controllers\Dashboard\QuestionsController;
 use App\Http\Controllers\Dashboard\SpecialistController;
+use App\Http\Controllers\Dashboard\TimeController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +65,43 @@ Route::group(['namespace'=>'Dashboard','middleware'=>'auth:admin', 'prefix' => '
         Route::post('update/{id}', [SpecialistController::class, 'update'])->name('specialist.update');
         Route::get('delete/{id}', [SpecialistController::class, 'destroy'])->name('specialist.delete');
     });
+    Route::group(['prefix' => 'times'], function () {
+        Route::get('/', [TimeController::class, 'index'])->name('time.index');
+        
+        Route::get('destroy/{day}', [TimeController::class, 'destroy'])->name('time.destroy');
+        Route::put('/time-schedules/update', [TimeController::class, 'updateMultiple'])->name('time.updateMultiple');
+    });
+    Route::group(['prefix' => 'services'], function () {
+        Route::get('/', [ServicesController::class, 'index'])->name('services.index');
+        Route::get('create', [ServicesController::class, 'create'])->name('services.create');
+        Route::post('store', [ServicesController::class, 'store'])->name('services.store');
+        Route::get('edit/{id}', [ServicesController::class, 'edit'])->name('services.edit');
+        Route::post('update/{id}', [ServicesController::class, 'update'])->name('services.update');
+        Route::get('destroy/{id}', [ServicesController::class, 'destroy'])->name('services.destroy');
+    });
+    Route::group(['prefix' => 'booking'], function () {
+        Route::get('/', [BookingController::class, 'index'])->name('bookings.index');
 
+    });
+    Route::group(['prefix' => 'questions'], function () {
+        Route::get('/', [QuestionsController::class, 'index'])->name('question.index');
+        Route::get('create', [QuestionsController::class, 'create'])->name('question.create');
+        Route::post('store', [QuestionsController::class, 'store'])->name('question.store');
+        Route::get('edit/{id}', [QuestionsController::class, 'edit'])->name('question.edit');
+        Route::post('update/{id}', [QuestionsController::class, 'update'])->name('question.update');
+        Route::get('delete/{id}', [QuestionsController::class, 'destroy'])->name('question.delete');
+    });
+    Route::group(['prefix' => 'contact_us'], function () {
+        Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+        Route::get('create', [ContactController::class, 'create'])->name('contact.create');
+        Route::post('store', [ContactController::class, 'store'])->name('contact.store');
+        Route::get('edit/{id}', [ContactController::class, 'edit'])->name('contact.edit');
+        Route::post('update/{id}', [ContactController::class, 'update'])->name('contact.update');
+        Route::get('delete/{id}', [ContactController::class, 'destroy'])->name('contact.delete');
+    });
+  
+
+    
 });
 Route::get('/privacy-policy', function () {
     return view('privacy');

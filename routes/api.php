@@ -111,3 +111,5 @@ Route::post('categorySpecialistSearch', [\App\Http\Controllers\Api\SearchControl
 Route::post('specialistSearch', [\App\Http\Controllers\Api\SearchController::class, 'specialistSearch']);
 
 Route::get('home', [\App\Http\Controllers\Api\HomeController::class, 'Home']);
+Route::get('contact_us', [\App\Http\Controllers\Api\SettingController::class, 'get_contact_us']);
+Route::get('questions', [\App\Http\Controllers\Api\SettingController::class, 'get_questions']);

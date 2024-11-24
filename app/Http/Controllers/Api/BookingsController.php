@@ -103,18 +103,34 @@ class BookingsController extends Controller
             return !Booking::where('specialist_id', $time->specialist_id)
                 ->where('service_id', $request->service_id)
                 ->where('time_id', $request->time_id)
-                ->where('time_specialist_id', $time->id)->whereDate('date', $request->date)->where('status', 'upcoming')
+                ->where('time_specialist_id', $time->id)
+                ->whereDate('date', $request->date)
+                ->where('status', 'upcoming')
                 ->exists();
         })->map(function ($time) {
             return [
                 'id' => $time->id,
-                'specialist' => $time->specialist,
+                'specialist' => [
+                    'id' => $time->specialist->id,
+                    'name' => $time->specialist->name,
+                    'Rate' => $time->specialist->Rate ?? "0",
+                    'image' => url('special_images/' . $time->specialist->image), // Adjust the path based on your directory structure
+                    'category_id' => $time->specialist->category_id,
+                    'created_at' => $time->specialist->created_at,
+                    'updated_at' => $time->specialist->updated_at,
+                    'category' => [
+                        'id' => $time->specialist->category->id,
+                        'name' => $time->specialist->category->name,
+                    ],
+                ],
             ];
         });
+
         return response()->json([
             'data' => $result->values(), // Ensure the response is a sequential array
         ], 200);
     }
+
 
 
     public function get_available_specialist_days_time_by_id(Request $request)
@@ -132,43 +148,43 @@ class BookingsController extends Controller
         ])
             ->where('service_id', $request->service_id)
             ->where('specialist_id', $request->specialist_id)
-            ->where('time_id', $request->time_id)
             ->get();
 
         // Filter available times
         $availableTimes = $times->filter(function ($time) use ($request) {
             return !Booking::where('specialist_id', $request->specialist_id)
                 ->where('service_id', $request->service_id)
-                ->where('time_id', $request->time_id)
                 ->where('time_specialist_id', $time->id)
-                ->whereDate('date', $request->date)
                 ->where('status', 'upcoming')
                 ->exists();
         });
 
-        // If no available times, return a 422 status
+        // If no available times, return an empty data array
         if ($availableTimes->isEmpty()) {
             return response()->json([
-                'message' => 'The requested time slot is unavailable.',
-            ], 422);
+                'message' => 'No available time slots were found.',
+                'data' => [],
+            ], 200);
         }
 
-        // Map available times to the desired structure
-        $result = $availableTimes->map(function ($time) {
+        // Group times by time_id and aggregate the time values
+        $groupedTimes = $availableTimes->groupBy('time_id')->map(function ($group) {
             return [
-                'id' => $time->id,
-                'time_id' => $time->time_id,
-                'time' => $time->start_time,
-                'service_id' => $time->service_id,
-                'specialist_id' => $time->specialist_id,
+                'id' => $group->pluck('id')->all(), // Take the last ID from the group
+                'time_id' => $group->first()->time_id,
+                'time' => $group->pluck('start_time')->all(), // Aggregate time values into an array
+                'service_id' => $group->first()->service_id,
+                'specialist_id' => $group->first()->specialist_id,
             ];
         });
 
-        // Return response with available times
+        // Return the grouped times as a response
         return response()->json([
-            'data' => $result->values(), // Ensure the response is a sequential array
+            'data' => $groupedTimes->values(), // Ensure the response is a sequential array
         ], 200);
     }
+
+
 
 
 
@@ -177,10 +193,8 @@ class BookingsController extends Controller
     {
         $validator = Validator::make($request->all(), [
 
-            'specialist_id' => 'required',
             'date' => 'required',
         ], [
-            'specialist_id.required' => trans('specialist is required'),
 
             'date.required' => trans('date is required'),
 

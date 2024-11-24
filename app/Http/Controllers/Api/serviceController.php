@@ -57,7 +57,7 @@ class serviceController extends Controller
                 $service['img_url'] = asset('services_images/' . $service->image);
                 return $service;
             });
-        $allCategoryServices['services_count'] = count($allCategoryServices);
+        //     $allCategoryServices['services_count'] = count($allCategoryServices);
         return response()->json([
             'message' => 'success',
             'data' => $allCategoryServices

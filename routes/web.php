@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Dashboard\BookingController;
-use App\Http\Controllers\Dashboard\ServicesController;
-use App\Http\Controllers\Dashboard\CategoriesController;
-use App\Http\Controllers\Dashboard\ContactController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\FeedbackController;
-use App\Http\Controllers\Dashboard\LoginController;
-use App\Http\Controllers\Dashboard\QuestionsController;
-use App\Http\Controllers\Dashboard\SpecialistController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\TimeController;
 use App\Http\Controllers\Dashboard\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\LoginController;
+use App\Http\Controllers\Dashboard\BookingController;
+use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\Dashboard\FeedbackController;
+use App\Http\Controllers\Dashboard\ServicesController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\QuestionsController;
+use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\SpecialistController;
+use App\Http\Controllers\Dashboard\SpecialistScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,26 +25,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace'=>'Dashboard','middleware'=>'guest'],function(){
-    Route::get('/',[LoginController::class,'login'])->name('admin.login');
-    Route::post('/login',[LoginController::class,'check'])->name('admin.check');
+//Route::get('/time-slots/{id}', [SpecialistScheduleController::class, 'create']);
+
+Route::group(['namespace' => 'Dashboard', 'middleware' => 'guest'], function () {
+    Route::get('/', [LoginController::class, 'login'])->name('admin.login');
+    Route::post('/login', [LoginController::class, 'check'])->name('admin.check');
 });
-Route::group(['namespace'=>'Dashboard','middleware'=>'auth:admin', 'prefix' => 'admin'],function(){
-   
-    Route::get('logout',[LoginController::class,'logout'])->name('logout');
-    Route::get('/',[DashboardController::class,'index'])->name('admin.dashboard');
-     Route::get('/export/pdf',  [DashboardController::class,'export_pdf'])->name('export_pdf');
-    
+Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin', 'prefix' => 'admin'], function () {
+
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/export/pdf',  [DashboardController::class, 'export_pdf'])->name('export_pdf');
 
 
-//route categories
+
+    //route categories
     Route::group(['prefix' => 'categories'], function () {
-        Route::get('/', [CategoriesController::class,'index'])->name('category.index');
-        Route::get('create', [CategoriesController::class,'create'])->name('category.create');
-        Route::post('store', [CategoriesController::class,'store'])->name('category.store');
-        Route::get('edit/{id}', [CategoriesController::class,'edit'])->name('category.edit');
-        Route::post('update/{id}', [CategoriesController::class,'update'])->name('category.update');
-        Route::get('delete/{id}', [CategoriesController::class,'destroy'])->name('category.delete');
+        Route::get('/', [CategoriesController::class, 'index'])->name('category.index');
+        Route::get('create', [CategoriesController::class, 'create'])->name('category.create');
+        Route::post('store', [CategoriesController::class, 'store'])->name('category.store');
+        Route::get('edit/{id}', [CategoriesController::class, 'edit'])->name('category.edit');
+        Route::post('update/{id}', [CategoriesController::class, 'update'])->name('category.update');
+        Route::get('delete/{id}', [CategoriesController::class, 'destroy'])->name('category.delete');
     });
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', [UserController::class, 'index'])->name('admin.users.index');
@@ -55,7 +58,6 @@ Route::group(['namespace'=>'Dashboard','middleware'=>'auth:admin', 'prefix' => '
     });
     Route::group(['prefix' => 'feedback'], function () {
         Route::get('/', [FeedbackController::class, 'index'])->name('feedback.index');
-       
     });
     Route::group(['prefix' => 'specialists'], function () {
         Route::get('/', [SpecialistController::class, 'index'])->name('specialist.index');
@@ -67,7 +69,7 @@ Route::group(['namespace'=>'Dashboard','middleware'=>'auth:admin', 'prefix' => '
     });
     Route::group(['prefix' => 'times'], function () {
         Route::get('/', [TimeController::class, 'index'])->name('time.index');
-        
+
         Route::get('destroy/{day}', [TimeController::class, 'destroy'])->name('time.destroy');
         Route::put('/time-schedules/update', [TimeController::class, 'updateMultiple'])->name('time.updateMultiple');
     });
@@ -81,7 +83,6 @@ Route::group(['namespace'=>'Dashboard','middleware'=>'auth:admin', 'prefix' => '
     });
     Route::group(['prefix' => 'booking'], function () {
         Route::get('/', [BookingController::class, 'index'])->name('bookings.index');
-
     });
     Route::group(['prefix' => 'questions'], function () {
         Route::get('/', [QuestionsController::class, 'index'])->name('question.index');
@@ -99,9 +100,6 @@ Route::group(['namespace'=>'Dashboard','middleware'=>'auth:admin', 'prefix' => '
         Route::post('update/{id}', [ContactController::class, 'update'])->name('contact.update');
         Route::get('delete/{id}', [ContactController::class, 'destroy'])->name('contact.delete');
     });
-  
-
-    
 });
 Route::get('/privacy-policy', function () {
     return view('privacy');

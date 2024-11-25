@@ -46,6 +46,7 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
+                                                <th>Phone</th>
                                                 <th>Date of Birth</th>
                                                 <th>Profile Image</th>
                                                 <th>Actions</th>
@@ -58,6 +59,7 @@
                                                 <td>{{ $client->id }}</td>
                                                 <td>{{ $client->name }}</td>
                                                 <td>{{ $client->email }}</td>
+                                                <td>{{ $client->phone }}</td>
                                                 <td>{{ $client->date_of_birth }}</td>
                                                 <td>
                                                     @if($client->image)

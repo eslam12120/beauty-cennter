@@ -81,8 +81,26 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1">الخدمات</label>
+                                                        <select name="services[]" class="select2 form-control" multiple>
+                                                            <optgroup label="اختر الخدمة">
+                                                                @if($services && $services->count() > 0)
+                                                                @foreach($services as $service)
+                                                                <option value="{{ $service->id }}">{{ $service->service_name_ar }}</option>
+                                                                @endforeach
+                                                                @endif
+                                                            </optgroup>
+                                                        </select>
+                                                        @error('services.0')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
 
-                                            
+
+
                                             </div>
                                         </div>
 

@@ -16,4 +16,10 @@ class TimeSpecialist extends Model
     {
         return $this->belongsTo(Specialist::class, 'specialist_id');
     }
+    public function services()
+    {
+        return $this->belongsTo(service::class, 'service_id');
+    }
+    
+
 }

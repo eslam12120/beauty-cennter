@@ -26,6 +26,10 @@ use App\Http\Controllers\Dashboard\SpecialistScheduleController;
 */
 
 //Route::get('/time-slots/{id}', [SpecialistScheduleController::class, 'create']);
+Route::get('available-times', [SpecialistScheduleController::class, 'getAvailableTimes'])->name('schedule.times');
+
+Route::get('available-days', [SpecialistScheduleController::class, 'getAvailabledays'])->name('schedule.days');
+// Route::get('/get-specialists-by-service', [SpecialistScheduleController::class, 'getSpecialistsByService'])->name('getSpecialistsByService');
 
 Route::group(['namespace' => 'Dashboard', 'middleware' => 'guest'], function () {
     Route::get('/', [LoginController::class, 'login'])->name('admin.login');
@@ -100,7 +104,18 @@ Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin', 'prefix'
         Route::post('update/{id}', [ContactController::class, 'update'])->name('contact.update');
         Route::get('delete/{id}', [ContactController::class, 'destroy'])->name('contact.delete');
     });
+    Route::group(['prefix' => 'specialist-schedule'], function () {
+        Route::get('/', [SpecialistScheduleController::class, 'index'])->name('schedule.index'); // عرض قائمة الجداول
+        Route::get('create', [SpecialistScheduleController::class, 'create'])->name('schedule.create'); // عرض نموذج إضافة جدول
+        Route::post('store', [SpecialistScheduleController::class, 'store'])->name('schedule.store'); // حفظ جدول جديد
+        Route::get('edit/{id}', [SpecialistScheduleController::class, 'edit'])->name('schedule.edit'); // عرض نموذج تعديل جدول
+        Route::post('update/{id}', [SpecialistScheduleController::class, 'update'])->name('schedule.update'); // تحديث الجدول
+        Route::get('delete/{id}', [SpecialistScheduleController::class, 'destroy'])->name('schedule.destroy'); // حذف الجدول
+        // جلب الأوقات المتاحة (AJAX)
+    });
+
 });
+
 Route::get('/privacy-policy', function () {
     return view('privacy');
 })->name('privacy.policy');

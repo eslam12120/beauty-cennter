@@ -26,25 +26,6 @@
                                    </li>
                             </ul>
                      </li>
-
-                     <li class="nav-item">
-                            <a href="">
-                                   <i class="la la-user-md"></i> <!-- Use an appropriate icon for specialists -->
-                                   <span class="menu-title" data-i18n="nav.dash.main">Specialists</span>
-                                   <span class="badge badge-danger badge-pill float-right mr-2">
-                                          {{ App\Models\Specialist::count() }} <!-- Adjust the model if needed -->
-                                   </span>
-                            </a>
-                            <ul class="menu-content">
-                                   <li>
-                                          <a class="menu-item" href="{{ route('specialist.index') }}" data-i18n="nav.dash.ecommerce">All Specialists</a>
-                                   </li>
-                                   <li>
-                                          <a class="menu-item" href="{{ route('specialist.create') }}" data-i18n="nav.dash.crypto">Add Specialist</a>
-                                   </li>
-                            </ul>
-                     </li>
-
                      <li class="nav-item">
                             <a href="">
                                    <i class="la la-tag"></i>
@@ -80,6 +61,26 @@
                                    </li>
                             </ul>
                      </li>
+
+                     <li class="nav-item">
+                            <a href="">
+                                   <i class="la la-user-md"></i> <!-- Use an appropriate icon for specialists -->
+                                   <span class="menu-title" data-i18n="nav.dash.main">Specialists</span>
+                                   <span class="badge badge-danger badge-pill float-right mr-2">
+                                          {{ App\Models\Specialist::count() }} <!-- Adjust the model if needed -->
+                                   </span>
+                            </a>
+                            <ul class="menu-content">
+                                   <li>
+                                          <a class="menu-item" href="{{ route('specialist.index') }}" data-i18n="nav.dash.ecommerce">All Specialists</a>
+                                   </li>
+                                   <li>
+                                          <a class="menu-item" href="{{ route('specialist.create') }}" data-i18n="nav.dash.crypto">Add Specialist</a>
+                                   </li>
+                            </ul>
+                     </li>
+
+
                      <!-- New Times Section -->
                      <li class="nav-item">
                             <a href="">
@@ -94,6 +95,24 @@
                                           <a class="menu-item" href="{{ route('time.index') }}" data-i18n="nav.dash.ecommerce">Times</a>
                                    </li>
 
+                            </ul>
+                     </li>
+                     <!-- New specialist Time Section -->
+                     <li class="nav-item">
+                            <a href="">
+                                   <i class="la la-cogs"></i> <!-- Icon for time management -->
+                                   <span class="menu-title" data-i18n="nav.dash.main">Specialist Time</span>
+                                   <span class="badge badge-danger badge-pill float-right mr-2">
+                                          {{ App\Models\TimeSpecialist::count() }} <!-- Adjust the model name if needed -->
+                                   </span>
+                            </a>
+                            <ul class="menu-content">
+                                   <li>
+                                          <a class="menu-item" href="{{ route('schedule.index') }}" data-i18n="nav.dash.ecommerce">All Specialist Times</a>
+                                   </li>
+                                   <li>
+                                          <a class="menu-item" href="{{ route('schedule.create') }}" data-i18n="nav.dash.crypto">Add Specialist Time</a>
+                                   </li>
                             </ul>
                      </li>
                      <!-- New Booking Section -->

@@ -42,7 +42,8 @@
                                 <div class="card-body">
                                     <form class="form" action="{{ route('specialist.update', $specialist->id) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        @method('POST') <!-- This is to use the PUT method for updating -->
+                                        @method('POST')
+
                                         <div class="form-body">
                                             <h4 class="form-section"><i class="ft-user"></i> Specialist Information</h4>
                                             <div class="row">
@@ -55,6 +56,20 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="image"> Image</label>
+                                                        <input type="file" name="image" class="form-control">
+                                                        <small>Leave blank to keep current image.</small>
+                                                        @error('image')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="category_id">Category</label>
@@ -71,40 +86,35 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-
-                                            </div>
-
-
-                                            <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="image">Image</label>
-                                                        <input type="file" name="image" class="form-control">
-                                                        @error('image')
+                                                        <label for="services">الخدمات</label>
+                                                        <select name="services[]" class="select2 form-control" multiple>
+                                                            <optgroup label="اختر الخدمة">
+                                                                @foreach($services as $service)
+                                                                <option value="{{ $service->id }}"
+                                                                    {{ in_array($service->id, $specialistServices) ? 'selected' : '' }}>
+                                                                    {{ $service->service_name_ar }}
+                                                                </option>
+                                                                @endforeach
+                                                            </optgroup>
+                                                        </select>
+                                                        @error('services')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
-                                                        @if($specialist->image)
-                                                        <div class="mt-2">
-                                                            <img src="{{ asset('special_images/' . $specialist->image) }}" style="width: 50px; height: 50px;" alt="Profile Image">
-                                                        </div>
-                                                        @else
-                                                        <span>No Image Available</span>
-                                                        @endif
                                                     </div>
+</div>
                                                 </div>
-
-
                                             </div>
-                                        </div>
 
-                                        <div class="form-actions">
-                                            <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
-                                                <i class="ft-x"></i> Cancel
-                                            </button>
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Update Specialist
-                                            </button>
-                                        </div>
+                                            <div class="form-actions">
+                                                <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
+                                                    <i class="ft-x"></i> Cancel
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> Update Specialist
+                                                </button>
+                                            </div>
                                     </form>
                                 </div>
                             </div>

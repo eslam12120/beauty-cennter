@@ -25,10 +25,12 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'phone' => 'required',
             'password' => 'required',
             'email' => 'required|email|unique:users,email',
             'date_of_birth' => 'nullable',
             'image' => 'nullable',
+
         ]);
 
         DB::beginTransaction();
@@ -46,6 +48,7 @@ class UserController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'password' => Hash::make($request->password),
             'image' => $filename,
+            'phone' => $request->phone,
         ]);
 
         DB::commit();
@@ -61,7 +64,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         // Validate the request
-        $request->validate([
+        $request->validate(['phone' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'date_of_birth' => 'nullable|date', // Ensure the date is in the correct format
@@ -77,6 +80,7 @@ class UserController extends Controller
             // Update the user's fields
             $user->update([
                 'name' => $request->name,
+                'phone' => $request->phone,
                 'email' => $request->email,
                 'date_of_birth' => $request->date_of_birth, // Ensure date of birth is saved
             ]);

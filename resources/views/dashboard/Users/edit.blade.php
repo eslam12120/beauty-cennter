@@ -89,6 +89,18 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="phone">phone</label>
+                                                        <input type="text" id="phone" class="form-control"
+                                                            name="phone" value="{{ $user->phone }}" placeholder="Enter client phone">
+                                                        @error('phone')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-actions">
                                             <button type="button" class="btn btn-warning mr-1" onclick="history.back();">

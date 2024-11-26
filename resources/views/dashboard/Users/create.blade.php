@@ -103,6 +103,17 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="phone">phone</label>
+                                                        <input type="text" id="phone" class="form-control"
+                                                            value="{{ old('phone') }}" name="phone" required>
+                                                        @error('phone')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
 

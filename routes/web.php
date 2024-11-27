@@ -120,7 +120,6 @@ Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin', 'prefix'
         Route::post('/store', [SpecialForYouController::class, 'store'])->name('store'); // Handle store logic
         Route::get('/delete/{id}', [SpecialForYouController::class, 'delete'])->name('delete'); // Handle delete logic
     });
-
 });
 
 Route::get('/privacy-policy', function () {

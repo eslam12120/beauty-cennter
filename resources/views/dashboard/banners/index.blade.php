@@ -98,8 +98,9 @@
                                          <td>
                                           <div class="btn-group" role="group" aria-label="Basic example">
 
-                                          <a href="{{route('admin.banners.delete',$banner->id)}}"
-                                           class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
+                                            <a href="{{ route('admin.banners.delete', $banner->id) }}"
+                                                class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"
+                                                onclick="return confirm('Are you sure you want to delete this banner?');">حذف</a>
                         </div>
                     </td>
 

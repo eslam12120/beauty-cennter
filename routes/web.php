@@ -118,7 +118,7 @@ Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin', 'prefix'
         Route::get('/', [SpecialForYouController::class, 'index'])->name('index'); // List all banners
         Route::get('/create', [SpecialForYouController::class, 'create'])->name('create'); // Show create form
         Route::post('/store', [SpecialForYouController::class, 'store'])->name('store'); // Handle store logic
-        Route::delete('/delete/{id}', [SpecialForYouController::class, 'delete'])->name('delete'); // Handle delete logic
+        Route::get('/delete/{id}', [SpecialForYouController::class, 'delete'])->name('delete'); // Handle delete logic
     });
 
 });

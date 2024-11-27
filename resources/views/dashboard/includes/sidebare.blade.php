@@ -47,6 +47,22 @@
 
                      <li class="nav-item">
                         <a href="">
+                               <i class="la la-tag"></i>
+                               <span class="menu-title" data-i18n="nav.dash.main">Notifications</span>
+                               <span class="badge badge-danger badge-pill float-right mr-2">
+                                      {{ App\Models\Notification::count() }}
+                               </span>
+                        </a>
+                        <ul class="menu-content">
+                               <li>
+                                      <a class="menu-item" href="{{ route('notification.create') }}" data-i18n="nav.dash.crypto">Send New Notification</a>
+                               </li>
+                        </ul>
+                 </li>
+
+
+                     <li class="nav-item">
+                        <a href="">
                                <i class="la la-group"></i>
                                <span class="menu-title" data-i18n="nav.dash.main">Banners</span>
                                <span class="badge badge-danger badge-pill float-right mr-2">

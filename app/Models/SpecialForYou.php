@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SpecialForYou extends Model
 {
     use HasFactory;
-    
+    protected $table = 'special_for_yous';
+    protected $guarded=[];
+
 }

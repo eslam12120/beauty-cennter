@@ -43,6 +43,26 @@
                                    </li>
                             </ul>
                      </li>
+
+
+                     <li class="nav-item">
+                        <a href="">
+                               <i class="la la-group"></i>
+                               <span class="menu-title" data-i18n="nav.dash.main">Banners</span>
+                               <span class="badge badge-danger badge-pill float-right mr-2">
+                                      {{ App\Models\SpecialForYou::count() }}
+                               </span>
+                        </a>
+                        <ul class="menu-content">
+                               <li>
+                                      <a class="menu-item" href="{{ route('admin.banners.index') }}" data-i18n="nav.dash.ecommerce">All Banners</a>
+                               </li>
+                               <li>
+                                      <a class="menu-item" href="{{ route('admin.banners.create') }}" data-i18n="nav.dash.crypto">Add Banner</a>
+                               </li>
+                        </ul>
+                 </li>
+
                      <!-- New Services Section -->
                      <li class="nav-item">
                             <a href="">

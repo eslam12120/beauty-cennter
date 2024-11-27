@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\QuestionsController;
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\SpecialistController;
+use App\Http\Controllers\Dashboard\SpecialForYouController;
 use App\Http\Controllers\Dashboard\SpecialistScheduleController;
 
 /*
@@ -112,6 +113,12 @@ Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin', 'prefix'
         Route::post('update/{id}', [SpecialistScheduleController::class, 'update'])->name('schedule.update'); // تحديث الجدول
         Route::get('delete/{id}', [SpecialistScheduleController::class, 'destroy'])->name('schedule.destroy'); // حذف الجدول
         // جلب الأوقات المتاحة (AJAX)
+    });
+    Route::prefix('admin/banners')->name('admin.banners.')->group(function () {
+        Route::get('/', [SpecialForYouController::class, 'index'])->name('index'); // List all banners
+        Route::get('/create', [SpecialForYouController::class, 'create'])->name('create'); // Show create form
+        Route::post('/store', [SpecialForYouController::class, 'store'])->name('store'); // Handle store logic
+        Route::delete('/delete/{id}', [SpecialForYouController::class, 'delete'])->name('delete'); // Handle delete logic
     });
 
 });

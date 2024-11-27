@@ -92,7 +92,7 @@
                                          @foreach ($banners as $banner)
                                                  <tr>
                                      <td>
-                                                    <img style="width:40px;" src="{{ asset('images/banners/'.$banner->banner) }}"/>
+                                                    <img style="width:40px;" src="{{ asset('special_images/'.$banner->image) }}"/>
 
                                      </td>
                                          <td>

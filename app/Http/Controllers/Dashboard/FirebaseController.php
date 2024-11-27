@@ -24,7 +24,9 @@ class FirebaseController extends Controller
 
         $title = $request->title;
         $message = $request->message;
-        $users = User::where('is_notify_offer', '1')->get(['id', 'device_token']);
+
+        $users = User::where('is_notify_offer', '1')->where('device_token', '!=', null)->get(['id', 'device_token']);
+
         // Retrieve user tokens for users who opted for notifications
         $validUsers = $users->filter(function ($user) {
             return !empty($user->device_token); // Ensures device_token is not null or empty

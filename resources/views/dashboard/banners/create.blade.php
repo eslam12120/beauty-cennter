@@ -62,9 +62,9 @@
 
                                                           <div class="col-md-12">
                                                         <div class="form-group">
-                                                        <label>الصور</label>
+                                                        <label>الصورة </label>
                                                       <input type="file"
-                                                 name="banner" class="form-control">
+                                                 name="image" class="form-control" required accept="image">
                                                         </div>
                                                         </div>
                                                         </div>

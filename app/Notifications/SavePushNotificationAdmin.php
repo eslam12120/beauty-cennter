@@ -9,9 +9,7 @@ use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification as FirebaseNotification;
 use Kreait\Firebase\Factory;
 use Google\Auth\OAuth2;
-
 use Google\Client as Google_Client;
-
 
 class SavePushNotificationAdmin extends Notification
 {

@@ -51,7 +51,17 @@
                                                 <td>{{ $booking->payment_type }}</td>
                                                 <td>{{ $booking->user ? $booking->user->name : 'N/A' }}</td>
                                                 <td>{{ $booking->status }}</td>
-                                          
+                                                @if( $booking->status == 'upcoming')
+                                                <td>
+    <a href="{{ url('admin/booking/update/' . $booking->id . '/1') }}"
+        class="btn btn-outline-success btn-min-width box-shadow-3 mr-1 mb-1">Complete Booking</a>
+    <br>
+    <a href="{{ url('admin/booking/update/' . $booking->id . '/2') }}"
+        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">Cancel Booking</a>
+</td>
+                                                @else
+                                             <td></td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         </tbody>

@@ -89,6 +89,7 @@ Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin', 'prefix'
     });
     Route::group(['prefix' => 'booking'], function () {
         Route::get('/', [BookingController::class, 'index'])->name('bookings.index');
+        Route::get('/update/{id}/{i}', [BookingController::class, 'update']);
     });
     Route::group(['prefix' => 'questions'], function () {
         Route::get('/', [QuestionsController::class, 'index'])->name('question.index');

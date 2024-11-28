@@ -13,6 +13,8 @@
 
                             </div>
                         </div>
+                         <img class="brand-logo" align="center" alt="modern admin logo"
+                             src="{{asset('assets/admin/images/logo/logo.png')}}" style="width:95%;">
                         <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
                             <span>الدخول للوحة التحكم </span>
                         </h6>

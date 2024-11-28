@@ -8,9 +8,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">Clients</a></li>
-                            <li class="breadcrumb-item active">Add Client</li>
+                            <li class="breadcrumb-item"><a href="">الرئيسية </a></li>
+                            <li class="breadcrumb-item"><a href="">العملاء</a></li>
+                            <li class="breadcrumb-item active">اضافة عميل </li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Add Client</h4>
+                                <h4 class="card-title" id="basic-layout-form">اضافة عميل </h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -42,11 +42,11 @@
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Client Information</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> معلومات العميل </h4>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="name">Name</label>
+                                                        <label for="name">الاسم </label>
                                                         <input type="text" id="name" class="form-control"
                                                             value="{{ old('name') }}" placeholder="Enter name"
                                                             name="name" required>
@@ -58,7 +58,7 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="password">Password</label>
+                                                        <label for="password">الرقم السري </label>
                                                         <input type="password" id="password" class="form-control"
                                                             placeholder="Enter password" name="password" required>
                                                         @error('password')
@@ -71,7 +71,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="email">Email</label>
+                                                        <label for="email">البريد الالكتروني </label>
                                                         <input type="email" id="email" class="form-control"
                                                             value="{{ old('email') }}" placeholder="Enter email"
                                                             name="email" required>
@@ -83,7 +83,7 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="date_of_birth">Date of Birth</label>
+                                                        <label for="date_of_birth">تاريخ الميلاد </label>
                                                         <input type="date" id="date_of_birth" class="form-control"
                                                             value="{{ old('date_of_birth') }}" name="date_of_birth" required>
                                                         @error('date_of_birth')
@@ -96,8 +96,8 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="image">Profile Image</label>
-                                                        <input type="file" name="image" class="form-control" required>
+                                                        <label for="image">الصورة الشخصية </label>
+                                                        <input type="file" name="image" class="form-control">
                                                         @error('image')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -105,8 +105,8 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="phone">phone</label>
-                                                        <input type="text" id="phone" class="form-control"
+                                                        <label for="phone">رقم الجوال </label>
+                                                        <input type="number" id="phone" class="form-control"
                                                             value="{{ old('phone') }}" name="phone" required>
                                                         @error('phone')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -120,10 +120,10 @@
                                         <div class="form-actions">
                                             <button type="button" class="btn btn-warning mr-1"
                                                 onclick="history.back();">
-                                                <i class="ft-x"></i> Cancel
+                                                <i class="ft-x"></i> الغاء
                                             </button>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Add Client
+                                                <i class="la la-check-square-o"></i> اضافة 
                                             </button>
                                         </div>
                                     </form>

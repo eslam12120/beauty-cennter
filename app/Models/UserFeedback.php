@@ -17,6 +17,6 @@ class UserFeedback extends Model
     ];
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id')->select('id', 'name', 'image');
+        return $this->belongsTo(User::class, 'user_id')->select('id', 'name', 'image', 'email');
     }
 }

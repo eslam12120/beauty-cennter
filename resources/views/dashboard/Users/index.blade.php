@@ -5,12 +5,12 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">Clients</h3>
+                <h3 class="content-header-title">العملاء</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item active">Clients</li>
+                            <li class="breadcrumb-item"><a href="">الرئيسية </a></li>
+                            <li class="breadcrumb-item active">العملاء </li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">All Clients</h4>
+                                <h4 class="card-title">جميع العملاء </h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -44,12 +44,12 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Date of Birth</th>
-                                                <th>Profile Image</th>
-                                                <th>Actions</th>
+                                                <th>الاسم </th>
+                                                <th>البريد الالكتروني </th>
+                                                <th>رقم الجوال </th>
+                                                <th>تاريخ الميلاد </th>
+                                                <th>صورة الشخصية </th>
+                                                <th>العمليات </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,8 +70,8 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <a href="{{ route('admin.users.edit', $client->id) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">Edit</a>
-                                                        <a href="{{ route('admin.users.delete', $client->id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">Delete</a>
+                                                        <a href="{{ route('admin.users.edit', $client->id) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل </a>
+                                                        <a href="{{ route('admin.users.delete', $client->id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف </a>
                                                     </div>
                                                 </td>
                                             </tr>

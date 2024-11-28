@@ -8,9 +8,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">Contacts</a></li>
-                            <li class="breadcrumb-item active">Edit Contact</li>
+                            <li class="breadcrumb-item"><a href="">الرئيسية</a></li>
+                            <li class="breadcrumb-item"><a href="">جهات الاتصال</a></li>
+                            <li class="breadcrumb-item active">تعديل الاتصال</li>
                         </ol>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Edit Contact</h4>
+                                <h4 class="card-title" id="basic-layout-form">تعديل الاتصال</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -41,16 +41,16 @@
                                         @csrf
                                         @method('POST') <!-- For PUT request -->
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Contact Information</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> معلومات الاتصال</h4>
 
-                                            <!-- Contact Arabic -->
+                                            <!-- الاتصال بالعربية -->
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="Contact_ar">Contact (Arabic)</label>
+                                                        <label for="Contact_ar">الاتصال (بالعربية)</label>
                                                         <input type="text" id="Contact_ar" class="form-control"
                                                             value="{{ old('title_ar', $contact->title_ar) }}"
-                                                            placeholder="Enter Arabic Contact"
+                                                            placeholder="أدخل الاتصال بالعربية"
                                                             name="title_ar" required>
                                                         @error('title_ar')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -58,13 +58,13 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- Contact English -->
+                                                <!-- الاتصال بالإنجليزية -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="Contact_en">Contact (English)</label>
+                                                        <label for="Contact_en">الاتصال (بالإنجليزية)</label>
                                                         <input type="text" id="Contact_en" class="form-control"
                                                             value="{{ old('title_en', $contact->title_en) }}"
-                                                            placeholder="Enter English Contact"
+                                                            placeholder="أدخل الاتصال بالإنجليزية"
                                                             name="title_en" required>
                                                         @error('title_en')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -73,14 +73,14 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Answer Arabic -->
+                                            <!-- الرابط -->
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="link_en">Link (English)</label>
+                                                        <label for="link_en">الرابط (بالإنجليزية)</label>
                                                         <input type="text" id="link_en" class="form-control"
                                                             value="{{ old('link', $contact->link) }}"
-                                                            placeholder="Enter Link Contact"
+                                                            placeholder="أدخل رابط الاتصال"
                                                             name="link" required>
                                                         @error('link')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -89,25 +89,21 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="image">Image</label>
+                                                        <label for="image">الصورة</label>
                                                         <input type="file" name="image" class="form-control">
                                                         @error('image')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                         @if($contact->image)
                                                         <div class="mt-2">
-                                                            <img src="{{ asset('contact_us/' . $contact->image) }}" style="width: 50px; height: 50px;" alt="Profile Image">
-                                                            <p class="mt-1">Current Image</p>
+                                                            <img src="{{ asset('contact_us/' . $contact->image) }}" style="width: 50px; height: 50px;" alt="صورة الملف الشخصي">
+                                                            <p class="mt-1">الصورة الحالية</p>
                                                         </div>
                                                         @else
-                                                        <span>No Image Available</span>
+                                                        <span>لا توجد صورة متاحة</span>
                                                         @endif
                                                     </div>
                                                 </div>
-
-
-
-
 
                                             </div>
                                         </div>
@@ -115,10 +111,10 @@
                                         <div class="form-actions">
                                             <button type="button" class="btn btn-warning mr-1"
                                                 onclick="history.back();">
-                                                <i class="ft-x"></i> Cancel
+                                                <i class="ft-x"></i> إلغاء
                                             </button>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Update Contact
+                                                <i class="la la-check-square-o"></i> تحديث الاتصال
                                             </button>
                                         </div>
                                     </form>

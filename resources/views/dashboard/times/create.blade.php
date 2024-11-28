@@ -9,9 +9,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">times</a></li>
-                            <li class="breadcrumb-item active">Add time</li>
+                            <li class="breadcrumb-item"><a href="">الصفحة الرئيسية </a></li>
+                            <li class="breadcrumb-item"><a href="">التوقيتات </a></li>
+                            <li class="breadcrumb-item active">اضافة توقيت </li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Add time</h4>
+                                <h4 class="card-title" id="basic-layout-form">اضافة توقيت </h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -43,7 +43,7 @@
                                     <form class="form" action="{{ route('time.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> time Weekly Schedule</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> مواعيد العمل </h4>
 
                                             @php
                                             $days = [
@@ -62,7 +62,7 @@
                                                 <!-- Day Selection -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="day_{{ $dayValue }}">Day</label>
+                                                        <label for="day_{{ $dayValue }}">اليوم </label>
                                                         <select name="day[]" id="day_{{ $dayValue }}" class="form-control">
                                                             <option value="{{ $dayValue }}">{{ $dayName }}</option>
                                                         </select>
@@ -75,7 +75,7 @@
                                                 <!-- Start Time -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="start_time_{{ $dayValue }}">Start Time</label>
+                                                        <label for="start_time_{{ $dayValue }}">وقت البداية </label>
                                                         <input type="time" id="start_time_{{ $dayValue }}" class="form-control" name="start_time[]">
                                                         @error('start_time')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -86,7 +86,7 @@
                                                 <!-- End Time -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="end_time_{{ $dayValue }}">End Time</label>
+                                                        <label for="end_time_{{ $dayValue }}">وقت النهاية </label>
                                                         <input type="time" id="end_time_{{ $dayValue }}" class="form-control" name="end_time[]">
                                                         @error('end_time')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -97,7 +97,7 @@
                                                 <!-- Is Opened Checkbox -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="is_opened_{{ $dayValue }}" class="mr-2">Status</label>
+                                                        <label for="is_opened_{{ $dayValue }}" class="mr-2">الحالة </label>
                                                         <select id="is_opened_{{ $dayValue }}" name="is_opened[]" class="form-control">
 
                                                             <option value="0">Close</option>
@@ -114,10 +114,10 @@
 
                                         <div class="form-actions">
                                             <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
-                                                <i class="ft-x"></i> Cancel
+                                                <i class="ft-x"></i> الغاء
                                             </button>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Add time
+                                                <i class="la la-check-square-o"></i> اضافة
                                             </button>
                                         </div>
                                     </form>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-Services
+الخدمات
 @endsection
 
 @section('content')
@@ -14,9 +14,9 @@ Services
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                <a href="{{ route('admin.dashboard') }}">لوحة التحكم</a>
                             </li>
-                            <li class="breadcrumb-item active">Services</li>
+                            <li class="breadcrumb-item active">الخدمات</li>
                         </ol>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ Services
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">All Services</h4>
+                                <h4 class="card-title">جميع الخدمات</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -49,13 +49,13 @@ Services
                                     <table class="table display nowrap table-striped table-bordered scroll-horizontal">
                                         <thead>
                                             <tr>
-                                                <th>English Name</th>
-                                                <th>Arabic Name</th>
-                                                <th>Category</th>
-                                                <th>Price</th>
-                                                <th>Image</th>
-                                                <th>Session Time</th>
-                                                <th>Action</th>
+                                                <th>الاسم بالإنجليزية</th>
+                                                <th>الاسم بالعربية</th>
+                                                <th>الفئة</th>
+                                                <th>السعر</th>
+                                                <th>الصورة</th>
+                                                <th>مدة الجلسة</th>
+                                                <th>الإجراء</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,19 +69,19 @@ Services
                                                     @if($service->image)
                                                     <img src="{{ URL::to('/services_images/' . $service->image) }}" style="width:150px;">
                                                     @else
-                                                    <span>No Image</span>
+                                                    <span>لا توجد صورة</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ $service->session_time }} minutes</td>
+                                                <td>{{ $service->session_time }} دقيقة</td>
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
                                                         <a href="{{ route('services.edit', $service->id) }}"
-                                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">Update</a>
+                                                            class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تحديث</a>
 
                                                         <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">Delete</button>
+                                                            <button type="submit" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</button>
                                                         </form>
                                                     </div>
                                                 </td>

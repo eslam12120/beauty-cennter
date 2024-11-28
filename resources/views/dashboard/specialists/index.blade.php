@@ -5,25 +5,25 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">Specialists</h3>
+                <h3 class="content-header-title">المتخصصون</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item active">Specialists</li>
+                            <li class="breadcrumb-item"><a href="">الرئيسية</a></li>
+                            <li class="breadcrumb-item active">المتخصصون</li>
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
         <div class="content-body">
-            <!-- DOM - jQuery events table -->
+            <!-- جدول أحداث jQuery DOM -->
             <section id="dom">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">All Specialists</h4>
+                                <h4 class="card-title">جميع المتخصصين</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -44,11 +44,11 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Rate</th>
-                                                <th>Category</th>
-                                                <th>Profile Image</th>
-                                                <th>Actions</th>
+                                                <th>الاسم</th>
+                                                <th>التقييم</th>
+                                                <th>الفئة</th>
+                                                <th>صورة الملف الشخصي</th>
+                                                <th>الإجراءات</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,18 +58,18 @@
                                                 <td>{{ $specialist->id }}</td>
                                                 <td>{{ $specialist->name }}</td>
                                                 <td>{{ $specialist->Rate }}</td>
-                                                <td>{{ $specialist->categories->name_ar ?? 'N/A' }}</td> <!-- Assuming category is a relationship -->
+                                                <td>{{ $specialist->categories->name_ar ?? 'غير متاح' }}</td> <!-- Assuming category is a relationship -->
                                                 <td>
                                                     @if($specialist->image)
-                                                    <img src="{{ asset('special_images/' . $specialist->image) }}" style="width: 50px; height: 50px;" alt="Profile Image">
+                                                    <img src="{{ asset('special_images/' . $specialist->image) }}" style="width: 50px; height: 50px;" alt="صورة الملف الشخصي">
                                                     @else
-                                                    <span>No Image</span>
+                                                    <span>لا توجد صورة</span>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <a href="{{ route('specialist.edit', $specialist->id) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">Edit</a>
-                                                        <a href="{{ route('specialist.delete', $specialist->id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">Delete</a>
+                                                        <a href="{{ route('specialist.edit', $specialist->id) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                        <a href="{{ route('specialist.delete', $specialist->id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -78,7 +78,7 @@
                                         </tbody>
                                     </table>
                                     <div class="justify-content-center d-flex">
-                                        {{-- Add pagination links if needed --}}
+                                        {{-- إضافة روابط التصفح إذا لزم الأمر --}}
                                     </div>
                                 </div>
                             </div>
@@ -89,5 +89,6 @@
         </div>
     </div>
 </div>
+
 
 @stop

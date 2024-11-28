@@ -8,9 +8,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">Contact_Us</a></li>
-                            <li class="breadcrumb-item active">Add Contact_Us</li>
+                            <li class="breadcrumb-item"><a href="">الرئيسية</a></li>
+                            <li class="breadcrumb-item"><a href="">اتصل بنا</a></li>
+                            <li class="breadcrumb-item active">إضافة اتصال</li>
                         </ol>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Add Contact_Us</h4>
+                                <h4 class="card-title" id="basic-layout-form">إضافة اتصال</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -41,15 +41,15 @@
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Contact_Us Information</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> معلومات الاتصال</h4>
 
-                                            <!-- Title Arabic -->
+                                            <!-- العنوان بالعربية -->
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="Title_ar">Title (Arabic)</label>
+                                                        <label for="Title_ar">العنوان (بالعربية)</label>
                                                         <input type="text" id="Title_ar" class="form-control"
-                                                            value="{{ old('title_ar') }}" placeholder="Enter Arabic Title"
+                                                            value="{{ old('title_ar') }}" placeholder="أدخل العنوان بالعربية"
                                                             name="title_ar" required>
                                                         @error('title_ar')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -57,64 +57,62 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- Title English -->
+                                                <!-- العنوان بالإنجليزية -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="Title_en">Title (English)</label>
+                                                        <label for="Title_en">العنوان (بالإنجليزية)</label>
                                                         <input type="text" id="Title_en" class="form-control"
-                                                            value="{{ old('title_en') }}" placeholder="Enter English Title"
+                                                            value="{{ old('title_en') }}" placeholder="أدخل العنوان بالإنجليزية"
                                                             name="title_en" required>
                                                         @error('title_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <!-- link -->
+                                                <!-- الرابط -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="link_en">Link</label>
+                                                        <label for="link_en">الرابط</label>
                                                         <input type="text" id="link" class="form-control"
-                                                            value="{{ old('link') }}" placeholder="link"
+                                                            value="{{ old('link') }}" placeholder="الرابط"
                                                             name="link" required>
                                                         @error('link')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <!-- Image -->
+                                                <!-- الصورة -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="image"> Image</label>
+                                                        <label for="image">الصورة</label>
                                                         <input type="file" name="image" class="form-control" required>
                                                         @error('image')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
-
-
                                             </div>
 
+                                        </div>
 
-
-                                <div class="form-actions">
-                                    <button type="button" class="btn btn-warning mr-1"
-                                        onclick="history.back();">
-                                        <i class="ft-x"></i> Cancel
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="la la-check-square-o"></i> Add Contact
-                                    </button>
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-warning mr-1"
+                                                onclick="history.back();">
+                                                <i class="ft-x"></i> إلغاء
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="la la-check-square-o"></i> إضافة اتصال
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+            </section>
         </div>
-        </section>
     </div>
-</div>
 </div>
 
 @stop

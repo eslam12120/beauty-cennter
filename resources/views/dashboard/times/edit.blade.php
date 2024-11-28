@@ -11,9 +11,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">Times</a></li>
-                            <li class="breadcrumb-item active">Edit Time</li>
+                            <li class="breadcrumb-item"><a href="">الصفحة الرئيسية </a></li>
+                            <li class="breadcrumb-item"><a href="">مواعيد العمل </a></li>
+                            <li class="breadcrumb-item active">تعديل المواعيد </li>
                         </ol>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Edit Time Schedule</h4>
+                                <h4 class="card-title" id="basic-layout-form">تعديل مواعيد العمل </h4>
                             </div>
 
                             @include('dashboard.includes.alerts.success')
@@ -40,7 +40,7 @@
                                         @method('PUT') <!-- Use PUT for updating the resource -->
 
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Time Weekly Schedule</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> مواعيد العمل </h4>
 
                                             @php
                                             $days = [
@@ -67,7 +67,7 @@
                                                 <!-- Start Time -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="start_time_{{ $dayValue }}">Start Time</label>
+                                                        <label for="start_time_{{ $dayValue }}">بداية الوقت </label>
                                                         <input type="time" id="start_time_{{ $dayValue }}" class="form-control" name="start_time[{{ $dayValue }}]" value="{{ $schedule->start_time }}">
                                                         @error('start_time')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -78,7 +78,7 @@
                                                 <!-- End Time -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="end_time_{{ $dayValue }}">End Time</label>
+                                                        <label for="end_time_{{ $dayValue }}">نهاية الوقت </label>
                                                         <input type="time" id="end_time_{{ $dayValue }}" class="form-control" name="end_time[{{ $dayValue }}]" value="{{ $schedule->end_time }}">
                                                         @error('end_time')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -89,7 +89,7 @@
                                                 <!-- Open/Close Status -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="is_open_{{ $dayValue }}">Status</label>
+                                                        <label for="is_open_{{ $dayValue }}">الحالة </label>
                                                         <select id="is_open_{{ $dayValue }}" name="is_open[{{ $dayValue }}]" class="form-control">
                                                             <option value="1" {{ $schedule->is_open == 1 ? 'selected' : '' }}>Open</option>
                                                             <option value="0" {{ $schedule->is_open == 0 ? 'selected' : '' }}>Close</option>
@@ -105,10 +105,10 @@
 
                                         <div class="form-actions">
                                             <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
-                                                <i class="ft-x"></i> Cancel
+                                                <i class="ft-x"></i> الغاء 
                                             </button>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Save Changes
+                                                <i class="la la-check-square-o"></i> تعديل 
                                             </button>
                                         </div>
                                     </form>

@@ -1,7 +1,7 @@
 <nav
     class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light bg-info navbar-shadow">
     <div class="navbar-wrapper">
-        <div class="navbar-header">
+        <div class="navbar-header" style="background-color:#8F635A">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a
                         class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
@@ -9,8 +9,8 @@
                 <li class="nav-item">
                     <a class="navbar-brand" href="{{route('admin.dashboard')}}">
                         <img class="brand-logo" alt="modern admin logo"
-                             src="{{asset('assets/admin/images/logo/logo.png')}}">
-                        <h3 class="brand-text">Dashboard</h3>
+                             src="{{asset('assets/admin/images/logo/logo.png')}}" style="width:90px; height:50px">
+                         <h3 class="brand-text" style="color:white" >After Glow</h3>
                     </a>
                 </li>
                 <li class="nav-item d-md-none">
@@ -19,7 +19,7 @@
                 </li>
             </ul>
         </div>
-        <div class="navbar-container content">
+        <div class="navbar-container content" style="background-color:#8F635A">
             <div class="collapse navbar-collapse" id="navbar-mobile">
                 <ul class="nav navbar-nav mr-auto float-left">
                     <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs"
@@ -36,7 +36,7 @@
                 </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right ">
-<a class="dropdown-item" href="{{ route('logout','web') }}"><i class="ft-power"></i> 
+<a class="dropdown-item" href="{{ route('logout','web') }}"><i class="ft-power"></i>
                             logout</a>
 
             <!--<form class="dropdown-item" method="GET" action="{{ route('logout','web') }}">-->
@@ -44,7 +44,7 @@
             <!--    <a class="dropdown-item bg-success" href="#" onclick="event.preventDefault();this.closest('form').submit();"> تسجيل الخروج</a>-->
             <!--</form>-->
         </div>
-                        
+
 
                     </li>
 

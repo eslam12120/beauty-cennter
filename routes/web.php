@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\LoginController;
 use App\Http\Controllers\Dashboard\BookingController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\FeedbackController;
+use App\Http\Controllers\Dashboard\FirebaseController;
 use App\Http\Controllers\Dashboard\ServicesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\QuestionsController;
@@ -88,6 +89,7 @@ Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin', 'prefix'
     });
     Route::group(['prefix' => 'booking'], function () {
         Route::get('/', [BookingController::class, 'index'])->name('bookings.index');
+        Route::get('/update/{id}/{i}', [BookingController::class, 'update']);
     });
     Route::group(['prefix' => 'questions'], function () {
         Route::get('/', [QuestionsController::class, 'index'])->name('question.index');
@@ -120,6 +122,10 @@ Route::group(['namespace' => 'Dashboard', 'middleware' => 'auth:admin', 'prefix'
         Route::post('/store', [SpecialForYouController::class, 'store'])->name('store'); // Handle store logic
         Route::get('/delete/{id}', [SpecialForYouController::class, 'delete'])->name('delete'); // Handle delete logic
     });
+    Route::get('/notifications/create', [FirebaseController::class, 'create'])->name('notification.create');
+
+    // Store Route (Handle form submission)
+    Route::post('/notifications/store', [FirebaseController::class, 'store'])->name('notification.store');
 });
 
 Route::get('/privacy-policy', function () {

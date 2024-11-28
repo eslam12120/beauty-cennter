@@ -17,4 +17,15 @@ class BookingController extends Controller
         // Return the view with the bookings data
         return view('dashboard.booking.index', compact('bookings'));
     }
+    public function update($id, $i)
+    {
+        // Fetch all Booking records or filter as needed
+        if ($i == 1) {
+            Booking::where('id', $id)->update(['status' => 'completed']);
+        } else {
+            $bookings = Booking::where('id', $id)->update(['status' => 'cancelled']); // Or use pagination like paginate(10) for large datasets
+        }
+        // Return the view with the bookings data
+        return redirect()->back()->with('success', 'Booking Updated successfully');
+    }
 }

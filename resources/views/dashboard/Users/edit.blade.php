@@ -8,9 +8,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">Clients</a></li>
-                            <li class="breadcrumb-item active">Edit Client</li>
+                            <li class="breadcrumb-item"><a href="">الرئيسية </a></li>
+                            <li class="breadcrumb-item"><a href="">العملاء</a></li>
+                            <li class="breadcrumb-item active">تعديل العميل </li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Edit Client</h4>
+                                <h4 class="card-title" id="basic-layout-form">تعديل العميل </h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -42,11 +42,11 @@
                                         method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Client Details</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> تفاصيل العميل </h4>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="name">Name</label>
+                                                        <label for="name">الاسم </label>
                                                         <input type="text" id="name" class="form-control"
                                                             name="name" value="{{ $user->name }}" placeholder="Enter client name">
                                                         @error('name')
@@ -56,7 +56,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="email">Email</label>
+                                                        <label for="email">البريد الالكتروني </label>
                                                         <input type="email" id="email" class="form-control"
                                                             name="email" value="{{ $user->email }}" placeholder="Enter client email">
                                                         @error('email')
@@ -68,7 +68,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="date_of_birth">Date of Birth</label>
+                                                        <label for="date_of_birth">تاريخ الميلاد </label>
                                                         <input type="date" id="date_of_birth" class="form-control"
                                                             name="date_of_birth" value="{{ $user->date_of_birth }}">
                                                         @error('date_of_birth')
@@ -78,7 +78,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="image">Profile Image</label>
+                                                        <label for="image">الصورة الشخصية </label>
                                                         <input type="file" id="image" name="image" class="form-control">
                                                         @if($user->image)
                                                         <img src="{{ asset('images/users/' . $user->image) }}" style="width: 50px; height: 50px;" alt="Profile Image">
@@ -92,7 +92,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="phone">phone</label>
+                                                        <label for="phone">رقم الجوال </label>
                                                         <input type="text" id="phone" class="form-control"
                                                             name="phone" value="{{ $user->phone }}" placeholder="Enter client phone">
                                                         @error('phone')
@@ -104,10 +104,10 @@
                                         </div>
                                         <div class="form-actions">
                                             <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
-                                                <i class="ft-x"></i> Cancel
+                                                <i class="ft-x"></i> الغاء 
                                             </button>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Update
+                                                <i class="la la-check-square-o"></i> تعديل 
                                             </button>
                                         </div>
                                     </form>

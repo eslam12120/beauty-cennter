@@ -5,7 +5,7 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">Create Specialist Time</h3>
+                <h3 class="content-header-title">إنشاء وقت المتخصص</h3>
             </div>
         </div>
         <div class="content-body">
@@ -19,51 +19,51 @@
                                 <form action="{{ route('schedule.store') }}" method="POST">
                                     @csrf
                                     <div class="form-body">
-                                        <!-- Service Field -->
+                                        <!-- خدمة Field -->
                                         <div class="form-group">
-                                            <label for="service_id">Service</label>
+                                            <label for="service_id">الخدمة</label>
                                             <select name="service_id" id="service_id" class="form-control" required>
-                                                <option value="" selected disabled>Select Service</option>
+                                                <option value="" selected disabled>اختر خدمة</option>
                                                 @foreach ($services as $service)
                                                 <option value="{{ $service->id }}">{{ $service->service_name_en }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="specialist">Specialist</label>
+                                            <label for="specialist">المتخصص</label>
                                             <select name="specialist" id="specialist" class="form-control" required>
-                                                <option value="" selected disabled>Select Specialist</option>
+                                                <option value="" selected disabled>اختر متخصص</option>
                                                 @foreach ($specialists as $specialist)
                                                 <option value="{{ $specialist->id }}" {{ old('specialist') == $specialist->id ? 'selected' : '' }}>{{ $specialist->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
 
-                                        <!-- Days Dropdown -->
+                                        <!-- أيام القائمة المنسدلة -->
                                         <div class="form-group">
-                                            <label for="day">Day</label>
+                                            <label for="day">اليوم</label>
                                             <select name="day" id="day" class="form-control" required>
-                                                <option value="" selected disabled>Select Day</option>
+                                                <option value="" selected disabled>اختر اليوم</option>
                                             </select>
                                         </div>
 
-                                        <!-- Start Time Dropdown -->
+                                        <!-- وقت البدء القائمة المنسدلة -->
                                         <div class="form-group">
-                                            <label for="start_time">Start Time</label>
+                                            <label for="start_time">وقت البدء</label>
                                             <select name="start_time" id="start_time" class="form-control" required>
-                                                <option value="" selected disabled>Select Start Time</option>
+                                                <option value="" selected disabled>اختر وقت البدء</option>
                                             </select>
                                         </div>
 
-                                        <!-- End Time Dropdown -->
+                                        <!-- وقت الانتهاء القائمة المنسدلة -->
                                         <div class="form-group">
-                                            <label for="end_time">End Time</label>
+                                            <label for="end_time">وقت الانتهاء</label>
                                             <select name="end_time" id="end_time" class="form-control" required>
-                                                <option value="" selected disabled>Select End Time</option>
+                                                <option value="" selected disabled>اختر وقت الانتهاء</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-primary">حفظ</button>
                                 </form>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
 <script>
     $(document).ready(function() {
 
-        // Fetch days when a service is selected
+        // جلب الأيام عند اختيار الخدمة
         $('#service_id').change(function() {
             let serviceId = $(this).val();
             if (serviceId) {
@@ -91,20 +91,20 @@
                         service_id: serviceId
                     },
                     success: function(data) {
-                        $('#day').empty().append('<option value="" selected disabled>Select Day</option>');
+                        $('#day').empty().append('<option value="" selected disabled>اختر اليوم</option>');
                         data.result.forEach(function(day) {
                             $('#day').append(`<option value="${day.time_id}">${day.name}</option>`);
                         });
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error fetching days:', error);
+                        console.error('خطأ في جلب الأيام:', error);
                     }
                 });
             }
         });
 
 
-        // Fetch time slots when a day is selected
+        // جلب الأوقات عند اختيار اليوم
         $('#day').change(function() {
             let serviceId = $('#service_id').val();
             let day = $(this).val();
@@ -117,8 +117,8 @@
                         day: day
                     },
                     success: function(data) {
-                        $('#start_time').empty().append('<option value="" selected disabled>Select Start Time</option>');
-                        $('#end_time').empty().append('<option value="" selected disabled>Select End Time</option>');
+                        $('#start_time').empty().append('<option value="" selected disabled>اختر وقت البدء</option>');
+                        $('#end_time').empty().append('<option value="" selected disabled>اختر وقت الانتهاء</option>');
                         console.log(data.result);
                         data.result.forEach(function(slot) {
                             slot.time_slots.forEach(function(time) {
@@ -129,8 +129,8 @@
                 });
             }
         });
-        // Fetch End Time Slots when a start time is selected
-        // Fetch End Time Slots when a start time is selected
+
+        // جلب أوقات الانتهاء عند اختيار وقت البدء
         $('#start_time').change(function() {
             let selectedStart = $(this).val();
             let serviceId = $('#service_id').val();
@@ -145,20 +145,20 @@
                         day: day
                     },
                     success: function(data) {
-                        console.log('Time Slots Data:', data); // لعرض البيانات للتأكد
+                        console.log('بيانات الأوقات:', data); // لعرض البيانات للتأكد
 
-                        // تنظيف End Time Dropdown
-                        $('#end_time').empty().append('<option value="" selected disabled>Select End Time</option>');
+                        // تنظيف قائمة وقت الانتهاء
+                        $('#end_time').empty().append('<option value="" selected disabled>اختر وقت الانتهاء</option>');
 
-                        // تحويل Start Time إلى طابع زمني (timestamp)
+                        // تحويل وقت البدء إلى طابع زمني (timestamp)
                         let startTimeStamp = new Date(`1970-01-01T${selectedStart}Z`).getTime();
 
-                        // فلترة أوقات النهاية بناءً على Start Time
+                        // فلترة أوقات الانتهاء بناءً على وقت البدء
                         data.result.forEach(function(slot) {
                             slot.time_slots.forEach(function(time) {
                                 let endTimeStamp = new Date(`1970-01-01T${time}Z`).getTime();
 
-                                // فقط الأوقات بعد Start Time
+                                // فقط الأوقات بعد وقت البدء
                                 if (endTimeStamp > startTimeStamp) {
                                     $('#end_time').append(`<option value="${time}">${time}</option>`);
                                 }
@@ -166,7 +166,7 @@
                         });
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error fetching end times:', error);
+                        console.error('خطأ في جلب أوقات الانتهاء:', error);
                         console.log('XHR:', xhr);
                     }
                 });

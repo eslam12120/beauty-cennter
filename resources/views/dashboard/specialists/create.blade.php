@@ -9,9 +9,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">Specialists</a></li>
-                            <li class="breadcrumb-item active">Add Specialist</li>
+                            <li class="breadcrumb-item"><a href="">الرئيسية</a></li>
+                            <li class="breadcrumb-item"><a href="">المتخصصون</a></li>
+                            <li class="breadcrumb-item active">إضافة متخصص</li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Add Specialist</h4>
+                                <h4 class="card-title" id="basic-layout-form">إضافة متخصص</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -43,12 +43,12 @@
                                     <form class="form" action="{{ route('specialist.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Specialist Information</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> بيانات المتخصص</h4>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="name">Name</label>
-                                                        <input type="text" id="name" class="form-control" value="{{ old('name') }}" placeholder="Enter name" name="name" required>
+                                                        <label for="name">الاسم</label>
+                                                        <input type="text" id="name" class="form-control" value="{{ old('name') }}" placeholder="أدخل الاسم" name="name" required>
                                                         @error('name')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -57,7 +57,7 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="image"> Image</label>
+                                                        <label for="image">الصورة</label>
                                                         <input type="file" name="image" class="form-control" required>
                                                         @error('image')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -69,11 +69,11 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="category_id">Category</label>
+                                                        <label for="category_id">الفئة</label>
                                                         <select name="category_id" class="form-control" required>
-                                                            <option value="">Select Category</option>
+                                                            <option value="">اختر الفئة</option>
                                                             @foreach($categories as $category)
-                                                            <option value="{{ $category->id }}">{{ $category->name_en }}</option>
+                                                            <option value="{{ $category->id }}">{{ $category->name_ar }}</option>
                                                             @endforeach
                                                         </select>
                                                         @error('category_id')
@@ -106,10 +106,10 @@
 
                                         <div class="form-actions">
                                             <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
-                                                <i class="ft-x"></i> Cancel
+                                                <i class="ft-x"></i> إلغاء
                                             </button>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Add Specialist
+                                                <i class="la la-check-square-o"></i> إضافة متخصص
                                             </button>
                                         </div>
                                     </form>
@@ -122,5 +122,6 @@
         </div>
     </div>
 </div>
+
 
 @stop

@@ -10,7 +10,7 @@
                     <a class="navbar-brand" href="{{route('admin.dashboard')}}">
                         <img class="brand-logo" alt="modern admin logo"
                              src="{{asset('assets/admin/images/logo/logo.png')}}" style="width:90px; height:50px">
-                         <h3 class="brand-text" style="color:white" >After Glow</h3>
+                         <h3 class="brand-text" style="color:white">أفتر جلو</h3>
                     </a>
                 </li>
                 <li class="nav-item d-md-none">
@@ -30,14 +30,14 @@
                 <ul class="nav navbar-nav float-right">
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                <span class="mr-1">hello {{auth()->user()->name}}
+                <span class="mr-1">مرحباً {{auth()->user()->name}}
                   <span
-                      class="user-name text-bold-700"> </span>
+                      class="user-name text-bold-700"></span>
                 </span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right ">
+                <div class="dropdown-menu dropdown-menu-right">
 <a class="dropdown-item" href="{{ route('logout','web') }}"><i class="ft-power"></i>
-                            logout</a>
+                            تسجيل الخروج</a>
 
             <!--<form class="dropdown-item" method="GET" action="{{ route('logout','web') }}">-->
             <!--    @csrf-->
@@ -56,7 +56,7 @@
 
 
                         <span
-                        class="user-name text-bold-700"> English</span>
+                        class="user-name text-bold-700">العربية</span>
 
 
 

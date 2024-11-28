@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-feedback
+التعليقات
 @endsection
 @section('content')
 
@@ -11,9 +11,9 @@ feedback
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">لوحة التحكم</a>
                             </li>
-                            <li class="breadcrumb-item active">feedback
+                            <li class="breadcrumb-item active">التعليقات
                             </li>
                         </ol>
                     </div>
@@ -21,13 +21,13 @@ feedback
             </div>
         </div>
         <div class="content-body">
-            <!-- DOM - jQuery events table -->
+            <!-- جدول أحداث jQuery - DOM -->
             <section id="dom">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">All feedback</h4>
+                                <h4 class="card-title">جميع التعليقات</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -47,10 +47,10 @@ feedback
                                     <table class="table display nowrap table-striped table-bordered scroll-horizontal">
                                         <thead>
                                             <tr>
-                                                <th> Name</th>
-                                                <th>Email</th>
-                                                <th>Description</th>
-                                                <th>RATE</th>
+                                                <th>الاسم</th>
+                                                <th>البريد الإلكتروني</th>
+                                                <th>الوصف</th>
+                                                <th>التقييم</th>
                                                 
                                             </tr>
                                         </thead>
@@ -61,9 +61,9 @@ feedback
                                             <tr>
 
 
-                                                <td>{{ $user->user->name ?? 'unknown' }}</td>
+                                                <td>{{ $user->user->name ?? 'غير معروف' }}</td>
                                                 <!-- Assuming you have a relationship set up -->
-                                                <td>{{ $user->user->email ?? 'unknown' }}</td>
+                                                <td>{{ $user->user->email ?? 'غير معروف' }}</td>
                                                 <td>{{ $user->description }}</td>
                                                 <td>{{ $user->rate }}</td>
 

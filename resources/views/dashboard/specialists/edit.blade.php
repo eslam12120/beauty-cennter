@@ -9,9 +9,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">Specialists</a></li>
-                            <li class="breadcrumb-item active">Edit Specialist</li>
+                            <li class="breadcrumb-item"><a href="">الرئيسية</a></li>
+                            <li class="breadcrumb-item"><a href="">المتخصصون</a></li>
+                            <li class="breadcrumb-item active">تعديل المتخصص</li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Edit Specialist</h4>
+                                <h4 class="card-title" id="basic-layout-form">تعديل المتخصص</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -45,12 +45,12 @@
                                         @method('POST')
 
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Specialist Information</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> معلومات المتخصص</h4>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="name">Name</label>
-                                                        <input type="text" id="name" class="form-control" value="{{ old('name', $specialist->name) }}" placeholder="Enter name" name="name" required>
+                                                        <label for="name">الاسم</label>
+                                                        <input type="text" id="name" class="form-control" value="{{ old('name', $specialist->name) }}" placeholder="أدخل الاسم" name="name" required>
                                                         @error('name')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -59,9 +59,9 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="image"> Image</label>
+                                                        <label for="image">الصورة</label>
                                                         <input type="file" name="image" class="form-control">
-                                                        <small>Leave blank to keep current image.</small>
+                                                        <small>اتركه فارغًا للحفاظ على الصورة الحالية.</small>
                                                         @error('image')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -72,9 +72,9 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="category_id">Category</label>
+                                                        <label for="category_id">الفئة</label>
                                                         <select name="category_id" class="form-control" required>
-                                                            <option value="">Select Category</option>
+                                                            <option value="">اختر الفئة</option>
                                                             @foreach($categories as $category)
                                                             <option value="{{ $category->id }}" {{ $specialist->category_id == $category->id ? 'selected' : '' }}>
                                                                 {{ $category->name_en }}
@@ -103,16 +103,15 @@
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
-</div>
                                                 </div>
                                             </div>
 
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
-                                                    <i class="ft-x"></i> Cancel
+                                                    <i class="ft-x"></i> إلغاء
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> Update Specialist
+                                                    <i class="la la-check-square-o"></i> تحديث المتخصص
                                                 </button>
                                             </div>
                                     </form>

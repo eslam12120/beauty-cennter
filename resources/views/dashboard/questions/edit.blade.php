@@ -8,9 +8,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item"><a href="">Questions</a></li>
-                            <li class="breadcrumb-item active">Edit Question</li>
+                            <li class="breadcrumb-item"><a href="">الرئيسية</a></li>
+                            <li class="breadcrumb-item"><a href="">الأسئلة</a></li>
+                            <li class="breadcrumb-item active">تعديل السؤال</li>
                         </ol>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-form">Edit Question</h4>
+                                <h4 class="card-title" id="basic-layout-form">تعديل السؤال</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -41,16 +41,16 @@
                                         @csrf
                                         @method('POST') <!-- For PUT request -->
                                         <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Question Information</h4>
+                                            <h4 class="form-section"><i class="ft-user"></i> معلومات السؤال</h4>
 
-                                            <!-- Question Arabic -->
+                                            <!-- السؤال بالعربية -->
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="question_ar">Question (Arabic)</label>
+                                                        <label for="question_ar">السؤال (باللغة العربية)</label>
                                                         <input type="text" id="question_ar" class="form-control"
                                                             value="{{ old('title_ar', $question->title_ar) }}"
-                                                            placeholder="Enter Arabic question"
+                                                            placeholder="أدخل السؤال بالعربية"
                                                             name="title_ar" required>
                                                         @error('title_ar')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -58,13 +58,13 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- Question English -->
+                                                <!-- السؤال بالإنجليزية -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="question_en">Question (English)</label>
+                                                        <label for="question_en">السؤال (باللغة الإنجليزية)</label>
                                                         <input type="text" id="question_en" class="form-control"
                                                             value="{{ old('title_en', $question->title_en) }}"
-                                                            placeholder="Enter English question"
+                                                            placeholder="أدخل السؤال بالإنجليزية"
                                                             name="title_en" required>
                                                         @error('title_en')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -73,13 +73,13 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Answer Arabic -->
+                                            <!-- الإجابة بالعربية -->
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="answer_ar">Answer (Arabic)</label>
+                                                        <label for="answer_ar">الإجابة (باللغة العربية)</label>
                                                         <textarea id="answer_ar" class="form-control"
-                                                            placeholder="Enter Arabic answer"
+                                                            placeholder="أدخل الإجابة بالعربية"
                                                             name="content_ar" rows="4" required>{{ old('content_ar', $question->content_ar) }}</textarea>
                                                         @error('content_ar')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -87,12 +87,12 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- Answer English -->
+                                                <!-- الإجابة بالإنجليزية -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="answer_en">Answer (English)</label>
+                                                        <label for="answer_en">الإجابة (باللغة الإنجليزية)</label>
                                                         <textarea id="answer_en" class="form-control"
-                                                            placeholder="Enter English answer"
+                                                            placeholder="أدخل الإجابة بالإنجليزية"
                                                             name="content_en" rows="4" required>{{ old('content_en', $question->content_en) }}</textarea>
                                                         @error('content_en')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -105,10 +105,10 @@
                                         <div class="form-actions">
                                             <button type="button" class="btn btn-warning mr-1"
                                                 onclick="history.back();">
-                                                <i class="ft-x"></i> Cancel
+                                                <i class="ft-x"></i> إلغاء
                                             </button>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Update Question
+                                                <i class="la la-check-square-o"></i> تحديث السؤال
                                             </button>
                                         </div>
                                     </form>

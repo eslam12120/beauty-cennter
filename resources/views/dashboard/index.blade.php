@@ -16,7 +16,7 @@
                                         <h1><i class="cc BTC warning font-large-2" title="BTC"></i></h1>
                                     </div>
                                     <div class="col-5 pl-2">
-                                        <h4 style="color:white">Categories</h4>
+                                        <h4 style="color:white">الاقسام</h4>
                                     </div>
                                     <div class="col-5 text-right">
                                         <h4 style="color:white">{{ App\Models\Category::count() }}</h4>
@@ -37,7 +37,7 @@
                                         <h1><i class="cc ETH blue-grey lighten-1 font-large-2" title="ETH"></i></h1>
                                     </div>
                                     <div class="col-5 pl-2">
-                                        <h4 style="color:white">Specialists</h4>
+                                        <h4 style="color:white">المتخصصين</h4>
                                     </div>
                                     <div class="col-5 text-right">
                                         <h4 style="color:white">{{ App\Models\Specialist::count() }}</h4>
@@ -58,7 +58,7 @@
                                         <h1><i class="cc ETH blue-grey lighten-1 font-large-2" title="ETH"></i></h1>
                                     </div>
                                     <div class="col-5 pl-2">
-                                        <h4 style="color:white">Services</h4>
+                                        <h4 style="color:white">الخدمات</h4>
                                     </div>
                                     <div class="col-5 text-right">
                                         <h4 style="color:white">{{ App\Models\service::count() }}</h4>
@@ -79,7 +79,7 @@
                                         <h1><i class="cc XRP info font-large-2" title="XRP"></i></h1>
                                     </div>
                                     <div class="col-5 pl-2">
-                                        <h4 style="color:white">Users</h4>
+                                        <h4 style="color:white">المستخدمين</h4>
                                     </div>
                                     <div class="col-5 text-right">
                                         <h4 style="color:white">{{ App\Models\User::count() }}</h4>
@@ -100,7 +100,7 @@
                                         <h1><i class="cc XRP info font-large-2" title="XRP"></i></h1>
                                     </div>
                                     <div class="col-5 pl-2">
-                                        <h4 style="color:white">Bookings</h4>
+                                        <h4 style="color:white">الحجوزات</h4>
                                     </div>
                                     <div class="col-5 text-right">
                                         <h4 style="color:white">{{ App\Models\Booking::count() }}</h4>
@@ -121,7 +121,7 @@
                                         <h1><i class="cc XRP info font-large-2" title="XRP"></i></h1>
                                     </div>
                                     <div class="col-5 pl-2">
-                                        <h4 style="color:white">Feedbacks</h4>
+                                        <h4 style="color:white">التعليقات</h4>
                                     </div>
                                     <div class="col-5 text-right">
                                         <h4 style="color:white">{{ App\Models\UserFeedback::count() }}</h4>
@@ -139,16 +139,16 @@
                 <div class="col-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">All Users</h4>
+                            <h4 class="card-title">احدث المستخدمين </h4>
                         </div>
                         <div class="card-content">
                             <div class="table-responsive">
                                 <table class="table table-de mb-0">
                                     <thead>
                                         <tr style="background-color:#8F635A">
-                                            <th style="color:white">Name</th>
-                                            <th style="color:white">Email</th>
-                                            <th style="color:white">Phone</th>
+                                            <th style="color:white">الاسم</th>
+                                            <th style="color:white">البريد الالكتروني </th>
+                                            <th style="color:white">رقم الجوال </th>
                                         </tr>
                                     </thead>
                                     <tbody style="background-color:#8F635A">
